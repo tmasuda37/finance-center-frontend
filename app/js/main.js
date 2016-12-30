@@ -7,6 +7,7 @@ import onRun     from './on_run';
 import 'angular-ui-router';
 import 'angular-jwt';
 import 'angular-lock';
+import 'iso-currency';
 import './templates';
 import './filters';
 import './controllers';
@@ -22,7 +23,8 @@ const requires = [
   'app.services',
   'app.directives',
   'auth0.lock',
-  'angular-jwt'
+  'angular-jwt',
+  'isoCurrency'
 ];
 
 // mount on window for testing
