@@ -1,4 +1,4 @@
-function OnRun($rootScope, AppSettings) {
+function OnRun($rootScope, AppSettings, lock, authService) {
   'ngInject';
 
   // change page title based on state
@@ -13,6 +13,17 @@ function OnRun($rootScope, AppSettings) {
     $rootScope.pageTitle += AppSettings.appTitle;
   });
 
+  // Put the authService on $rootScope so its methods
+  // can be accessed from the nav bar
+  $rootScope.authService = authService;
+
+  // Register the authentication listener that is
+  // set up in auth.service.js
+  authService.registerAuthenticationListener();
+
+  // Register the synchronous hash parser
+  // when using UI Router
+  lock.interceptHash();
 }
 
 export default OnRun;
