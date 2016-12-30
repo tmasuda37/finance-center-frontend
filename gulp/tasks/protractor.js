@@ -16,7 +16,7 @@ gulp.task('protractor', ['prod', 'webdriverUpdate', 'webdriver'], function(cb) {
 
   testServer({
     port: config.testPort,
-    dir: config.buildDir
+    dir: config.publicDir
   }).then((server) => {
     testFiles.pipe(protractor({
         configFile: config.test.protractor
