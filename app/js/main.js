@@ -5,6 +5,8 @@ import constants from './constants';
 import onConfig  from './on_config';
 import onRun     from './on_run';
 import 'angular-ui-router';
+import 'angular-jwt';
+import 'angular-lock';
 import './templates';
 import './filters';
 import './controllers';
@@ -18,7 +20,9 @@ const requires = [
   'app.filters',
   'app.controllers',
   'app.services',
-  'app.directives'
+  'app.directives',
+  'auth0.lock',
+  'angular-jwt'
 ];
 
 // mount on window for testing
