@@ -1,0 +1,34 @@
+<form role="form">
+
+  <div class="alert alert-success" ng-show="balance.amount">
+    <strong>Success!</strong> Your current balance is <strong>{{balance.amount | isoCurrency:balance.currency}}</strong>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="amount">Amount</label>
+    <input type="number" class="form-control" id="amount" step="any" ng-model="newTx.amount">
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="calendar">Date</label>
+    <input type="date" class="form-control" id="calendar" ng-model="newTx.calendar">
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="calendar">Category</label>
+    <select class="form-control" name="category" id="category" ng-model="newTx.category">
+      <option ng-repeat="item in categoryList" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="currency">Currency</label>
+    <select class="form-control" name="currency" id="currency" ng-model="newTx.currency">
+      <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" ng-click="submit(newTx)">Add</button>
+</form>
+
+

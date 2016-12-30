@@ -1,4 +1,4 @@
-var exampleCtrl = function ($scope, authService) {
+var ctrl = function ($scope, authService) {
 
   // ViewModel
   const vm = this;
@@ -9,9 +9,9 @@ var exampleCtrl = function ($scope, authService) {
 
 };
 
-exampleCtrl.$inject = ['$scope', 'authService'];
+ctrl.$inject = ['$scope', 'authService'];
 
 export default {
   name: 'ExampleCtrl',
-  fn: exampleCtrl
+  fn: ctrl
 };

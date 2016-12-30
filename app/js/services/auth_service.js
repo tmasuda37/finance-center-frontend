@@ -17,7 +17,7 @@ function authService(lock, authManager) {
   service.logout = function() {
     localStorage.removeItem('id_token');
     authManager.unauthenticate();
-    window.location.replace('/');
+    window.location.href = '/';
   }
 
   return service;
