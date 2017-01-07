@@ -8,6 +8,7 @@ import 'angular-ui-router';
 import 'angular-jwt';
 import 'angular-lock';
 import 'iso-currency';
+import 'angular-smart-table';
 import './templates';
 import './filters';
 import './controllers';
@@ -24,7 +25,8 @@ const requires = [
   'app.directives',
   'auth0.lock',
   'angular-jwt',
-  'isoCurrency'
+  'isoCurrency',
+  'smart-table'
 ];
 
 // mount on window for testing

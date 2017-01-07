@@ -22,6 +22,11 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       url: '/add-account',
       controller: 'AddAccountCtrl'
     })
+    .state('transactions', {
+      url: '/transactions',
+      templateUrl: 'transactions.html',
+      controller: 'TransactionsCtrl'
+    })
     .state('addTransaction', {
       url: '/add-transaction',
       controller: 'AddTransactionCtrl',
