@@ -7,6 +7,10 @@ function transactionService(transportService) {
     return transportService.send('POST', 'transaction/create', data)
   };
 
+  service.defaultList = function (data) {
+    return transportService.send('POST', 'transaction/list', data);
+  };
+
   return service;
 }
 

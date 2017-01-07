@@ -1,8 +1,5 @@
 var ctrl = function ($scope, $state, accountService) {
 
-  // ViewModel
-  const vm = this;
-
   accountService.create().then(
     function(response) {
       $state.go('addTransaction');
