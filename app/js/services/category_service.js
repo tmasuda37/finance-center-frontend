@@ -1,10 +1,18 @@
-function categoryService(transportService) {
+function service(transportService) {
   'ngInject';
 
   const service = {};
 
-  service.getCategories = function () {
+  service.create = function (data) {
+    return transportService.send('POST', 'category/create', data)
+  };
+
+  service.defaultList = function () {
     return transportService.send('GET', 'category/list')
+  };
+
+  service.getCategoryApplyToList = function () {
+    return transportService.send('GET', 'category/apply-to-list')
   };
 
   return service;
@@ -12,5 +20,5 @@ function categoryService(transportService) {
 
 export default {
   name: 'categoryService',
-  fn: categoryService
+  fn: service
 };

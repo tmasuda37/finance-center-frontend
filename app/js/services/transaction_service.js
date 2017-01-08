@@ -1,4 +1,4 @@
-function transactionService(transportService) {
+function service(transportService) {
   'ngInject';
 
   const service = {};
@@ -16,5 +16,5 @@ function transactionService(transportService) {
 
 export default {
   name: 'transactionService',
-  fn: transactionService
+  fn: service
 };

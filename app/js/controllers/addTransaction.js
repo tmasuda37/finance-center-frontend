@@ -1,7 +1,4 @@
-var ctrl = function ($scope, categoryService, currencyService, transactionService) {
-
-  // ViewModel
-  const vm = this;
+var ctrl = function ($scope, categoryService, currencyService, eventService, placeService, transactionService) {
 
   // todo: Loading Default Configuration
   $scope.newTx = {
@@ -10,12 +7,20 @@ var ctrl = function ($scope, categoryService, currencyService, transactionServic
 
   $scope.balance = {};
 
-  categoryService.getCategories().then(function(data) {
+  categoryService.defaultList().then(function(data) {
     $scope.categoryList = data;
   });
 
-  currencyService.getCurrencies().then(function(data) {
+  currencyService.defaultList().then(function(data) {
     $scope.currencyList = data;
+  });
+
+  eventService.defaultList().then(function(data) {
+    $scope.eventList = data;
+  });
+
+  placeService.defaultList().then(function(data) {
+    $scope.placeList = data;
   });
 
   $scope.submit = function (data) {
@@ -36,7 +41,7 @@ var ctrl = function ($scope, categoryService, currencyService, transactionServic
 
 };
 
-ctrl.$inject = ['$scope', 'categoryService', 'currencyService', 'transactionService'];
+ctrl.$inject = ['$scope', 'categoryService', 'currencyService', 'eventService', 'placeService', 'transactionService'];
 
 export default {
   name: 'AddTransactionCtrl',

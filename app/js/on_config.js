@@ -34,6 +34,21 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       title: 'Add new transaction',
       controllerAs: 'vm'
     })
+    .state('categories', {
+      url: '/categories',
+      templateUrl: 'categories.html',
+      controller: 'CategoriesCtrl'
+    })
+    .state('events', {
+      url: '/events',
+      templateUrl: 'events.html',
+      controller: 'EventsCtrl'
+    })
+    .state('places', {
+      url: '/places',
+      templateUrl: 'places.html',
+      controller: 'PlacesCtrl'
+    })
     .state('doLogout', {
       url: '/logout',
       controller: 'LogoutCtrl'
