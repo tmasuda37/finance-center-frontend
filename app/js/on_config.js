@@ -13,10 +13,9 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $stateProvider
     .state('home', {
       url: '/',
-      controller: 'ExampleCtrl as home',
+      controller: 'HomeCtrl',
       templateUrl: 'home.html',
-      title: 'Home',
-      controllerAs: 'vm'
+      title: 'Home'
     })
     .state('createAccount', {
       url: '/add-account',
@@ -25,29 +24,32 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     .state('transactions', {
       url: '/transactions',
       templateUrl: 'transactions.html',
-      controller: 'TransactionsCtrl'
+      controller: 'TransactionsCtrl',
+      title: 'All transactions'
     })
     .state('addTransaction', {
       url: '/add-transaction',
       controller: 'AddTransactionCtrl',
       templateUrl: 'add-transaction.html',
-      title: 'Add new transaction',
-      controllerAs: 'vm'
+      title: 'Add a new transaction'
     })
     .state('categories', {
       url: '/categories',
       templateUrl: 'categories.html',
-      controller: 'CategoriesCtrl'
+      controller: 'CategoriesCtrl',
+      title: 'Manage your categories'
     })
     .state('events', {
       url: '/events',
       templateUrl: 'events.html',
-      controller: 'EventsCtrl'
+      controller: 'EventsCtrl',
+      title: 'Manage your events'
     })
     .state('places', {
       url: '/places',
       templateUrl: 'places.html',
-      controller: 'PlacesCtrl'
+      controller: 'PlacesCtrl',
+      title: 'Manage your places'
     })
     .state('doLogout', {
       url: '/logout',
