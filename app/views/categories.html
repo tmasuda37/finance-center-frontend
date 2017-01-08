@@ -11,9 +11,23 @@
 
   <div class="form-group">
     <label class="control-label" for="categoryApplyToList">Category</label>
-    <select class="form-control" name="category" id="categoryApplyToList" ng-model="newCategory.categoryApplyTo">
+    <select class="form-control" name="categoryApplyToList" id="categoryApplyToList" ng-model="newCategory.categoryApplyTo">
       <option ng-repeat="item in categoryApplyToList" ng-value="item">{{item}}</option>
     </select>
+  </div>
+
+  <div class="form-group">
+    <label>To Expense?</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="toExpense1" id="toExpense1" ng-model="newCategory.toExpense" value="true">True
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="toExpense2" id="toExpense2" ng-model="newCategory.toExpense" value="false">False
+      </label>
+    </div>
   </div>
 
   <button class="btn btn-primary" ng-click="submit(newCategory)">Add</button>

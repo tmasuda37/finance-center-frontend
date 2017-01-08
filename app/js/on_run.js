@@ -1,4 +1,4 @@
-function OnRun($rootScope, AppSettings, lock, authService) {
+function OnRun($rootScope, AppSettings, lock, authService, $state) {
   'ngInject';
 
   // change page title based on state
@@ -24,6 +24,9 @@ function OnRun($rootScope, AppSettings, lock, authService) {
   // Register the synchronous hash parser
   // when using UI Router
   lock.interceptHash();
+
+  // Get router values
+  $rootScope.$state = $state;
 }
 
 export default OnRun;
