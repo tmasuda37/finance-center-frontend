@@ -1,4 +1,4 @@
-function transportService($http, $q) {
+function service($http, $q) {
   'ngInject';
 
   const service = {};
@@ -33,5 +33,5 @@ function transportService($http, $q) {
 
 export default {
   name: 'transportService',
-  fn: transportService
+  fn: service
 };

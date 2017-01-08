@@ -9,6 +9,7 @@ import 'angular-jwt';
 import 'angular-lock';
 import 'iso-currency';
 import 'angular-smart-table';
+import 'angular-ui-bootstrap';
 import './templates';
 import './filters';
 import './controllers';
@@ -26,6 +27,7 @@ const requires = [
   'auth0.lock',
   'angular-jwt',
   'isoCurrency',
+  'ui.bootstrap',
   'smart-table'
 ];
 

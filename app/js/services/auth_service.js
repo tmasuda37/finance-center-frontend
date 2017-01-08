@@ -1,4 +1,4 @@
-function authService(lock, authManager) {
+function service(lock, authManager) {
   'ngInject';
 
   const service = {};
@@ -25,5 +25,5 @@ function authService(lock, authManager) {
 
 export default {
   name: 'authService',
-  fn: authService
+  fn: service
 };

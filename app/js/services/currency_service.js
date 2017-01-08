@@ -1,9 +1,9 @@
-function currencyService(transportService) {
+function service(transportService) {
   'ngInject';
 
   const service = {};
 
-  service.getCurrencies = function () {
+  service.defaultList = function () {
     return transportService.send('GET', 'currency/list')
   };
 
@@ -12,5 +12,5 @@ function currencyService(transportService) {
 
 export default {
   name: 'currencyService',
-  fn: currencyService
+  fn: service
 };

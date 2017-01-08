@@ -1,7 +1,7 @@
 var ctrl = function ($scope, $state, accountService) {
 
   accountService.create().then(
-    function(response) {
+    function() {
       $state.go('addTransaction');
     }, function(error) {
       console.error(error);
