@@ -40,7 +40,7 @@
         <td>
           <select class="form-control" name="event{{$index}}" id="event{{$index}}" ng-model="row.event">
             <option ng-value="">--</option>
-            <option ng-repeat="item in eventList" ng-value="item">{{item}}</option>
+            <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
           </select>
         </td>
         <td>
