@@ -1,6 +1,22 @@
-var ctrl = function ($scope) {
+var ctrl = function ($scope, categoryService, currencyService, eventService, placeService, transactionService) {
 
   var reader = new FileReader();
+
+  categoryService.defaultList().then(function(data) {
+    $scope.categoryList = data;
+  });
+
+  currencyService.defaultList().then(function(data) {
+    $scope.currencyList = data;
+  });
+
+  eventService.defaultList().then(function(data) {
+    $scope.eventList = data;
+  });
+
+  placeService.defaultList().then(function(data) {
+    $scope.placeList = data;
+  });
 
   var removeCommaInQuotes = function (str) {
     let inQuote = false;
@@ -31,11 +47,13 @@ var ctrl = function ($scope) {
     var lines = content.split('\n');
     var linesWithoutHeader = lines.splice(1);
 
-    $scope.rowCollection = _.map(linesWithoutHeader, function (line) {
+    const importedItems = [];
+
+    _.each(linesWithoutHeader, function (line) {
       var splitReadyLine = removeCommaInQuotes(line);
 
       if (!splitReadyLine || splitReadyLine.length === 0) {
-        return {};
+        return;
       }
 
       var values = splitReadyLine.split(',');
@@ -46,19 +64,33 @@ var ctrl = function ($scope) {
         description = values[2].replace(/\"|\'/g, '');
       }
 
-      return {
+      importedItems.push({
         calendar: new Date(dateInfo[2], dateInfo[1], dateInfo[0]),
-        amount: values[3],
+        category: $scope.categoryList[0],
+        currency: $scope.currencyList[0],
+        amount: Math.abs(values[3]),
+        toExpense: values[3] < 0,
         description
-      };
+      });
     })
+
+    $scope.rowCollection = importedItems;
 
     $scope.$apply();
   };
 
+  $scope.submit = function () {
+    transactionService.createAll($scope.rowCollection).then(
+      function() {
+        $scope.rowCollection = [];
+      }, function(error) {
+        console.error(error);
+      });
+  };
+
 };
 
-ctrl.$inject = ['$scope'];
+ctrl.$inject = ['$scope', 'categoryService', 'currencyService', 'eventService', 'placeService', 'transactionService'];
 
 export default {
   name: 'ImportCSVCtrl',
