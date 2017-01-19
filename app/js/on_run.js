@@ -27,6 +27,8 @@ function OnRun($rootScope, AppSettings, lock, authService, $state) {
 
   // Get router values
   $rootScope.$state = $state;
+
+  $rootScope._ = window._;
 }
 
 export default OnRun;

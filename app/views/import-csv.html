@@ -1,0 +1,37 @@
+<form role="form">
+
+  <div class="form-group">
+    <label>File input</label>
+    <input type="file" file-upload="importFile">
+  </div>
+
+  <hr/>
+
+  <table st-table="rowCollection" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Place</th>
+        <th>Event</th>
+        <th>Currency</th>
+        <th>Amount</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in rowCollection">
+        <td>{{row.calendar | date}}</td>
+        <td>{{row.category.name}}</td>
+        <td>{{row.place.name}}</td>
+        <td>{{row.event.name}}</td>
+        <td>{{row.currency}}</td>
+        <td>{{row.amount | isoCurrency:row.currency}}</td>
+        <td>{{row.description}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</form>
+
+

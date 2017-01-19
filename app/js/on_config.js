@@ -33,6 +33,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       templateUrl: 'add-transaction.html',
       title: 'Add a new transaction'
     })
+    .state('importCSV', {
+      url: '/import-csv',
+      controller: 'ImportCSVCtrl',
+      templateUrl: 'import-csv.html',
+      title: 'Import CSV'
+    })
     .state('categories', {
       url: '/categories',
       templateUrl: 'categories.html',

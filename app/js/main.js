@@ -34,7 +34,7 @@ const requires = [
 // mount on window for testing
 window.app = angular.module('app', requires);
 
-angular.module('app').constant('AppSettings', constants);
+angular.module('app').constant('AppSettings', constants).constant('_', window._);
 
 angular.module('app').config(onConfig);
 
