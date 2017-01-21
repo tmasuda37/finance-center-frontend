@@ -1,4 +1,4 @@
-var ctrl = function ($scope, categoryService, currencyService, eventService, placeService, transactionService) {
+var ctrl = function ($scope, $stateParam, categoryService, currencyService, eventService, placeService, transactionService) {
 
   $scope.newTx = {
     calendar: new Date()
@@ -45,9 +45,9 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
 };
 
-ctrl.$inject = ['$scope', 'categoryService', 'currencyService', 'eventService', 'placeService', 'transactionService'];
+ctrl.$inject = ['$scope', '$stateParams', 'categoryService', 'currencyService', 'eventService', 'placeService', 'transactionService'];
 
 export default {
-  name: 'AddTransactionCtrl',
+  name: 'AddOrEditTransactionCtrl',
   fn: ctrl
 };

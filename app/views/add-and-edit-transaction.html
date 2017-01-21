@@ -22,10 +22,8 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="currency">Currency</label>
-    <select class="form-control" name="currency" id="currency" ng-model="newTx.currency">
-      <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
-    </select>
+    <label>Description</label>
+    <textarea class="form-control" rows="3" ng-model="newTx.description"></textarea>
   </div>
 
   <div class="form-group">
@@ -41,6 +39,13 @@
     <select class="form-control" name="event" id="event" ng-model="newTx.event">
       <option ng-value="">--</option>
       <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="currency">Currency</label>
+    <select class="form-control" name="currency" id="currency" ng-model="newTx.currency">
+      <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
     </select>
   </div>
 

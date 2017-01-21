@@ -15,6 +15,10 @@ function service(transportService) {
     return transportService.send('POST', 'transaction/list', data);
   };
 
+  service.delete = function (data) {
+    return transportService.send('POST', 'transaction/delete', data);
+  };
+
   return service;
 }
 

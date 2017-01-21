@@ -5,7 +5,7 @@
     <input type="month" class="form-control" id="targetMonth" ng-model="targetMonth" ng-change="retrieve(targetMonth)">
   </div>
 
-  <div ng-repeat="item in wrappedList">
+  <div ng-show="item.monthlyBalance.length > 0" ng-repeat="item in wrappedList">
     <h3>{{item.currency}}</h3>
     <table class="table table-striped">
       <thead>

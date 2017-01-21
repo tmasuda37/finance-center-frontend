@@ -1,6 +1,8 @@
-var ctrl = function ($scope, transactionService, currencyService) {
+var ctrl = function ($scope, $state, transactionService, currencyService) {
 
   $scope.targetMonth = new Date();
+
+  $scope.itemPerPage = '12';
 
   currencyService.defaultList().then(function(data) {
     $scope.currencyList = data;
@@ -8,6 +10,7 @@ var ctrl = function ($scope, transactionService, currencyService) {
 
   currencyService.defaultCurrency().then(function(data) {
     $scope.currency = data;
+    $scope.retrieve($scope.targetMonth, $scope.currency);
   });
 
   $scope.retrieve = function (calendar, currency) {
@@ -17,11 +20,23 @@ var ctrl = function ($scope, transactionService, currencyService) {
     });
   };
 
-  $scope.retrieve($scope.targetMonth, $scope.currency);
+  $scope.edit = function (tx) {
+    if (confirm("Are you sure to edit?")) {
+      $state.go('addOrEditTransaction', {publicId: tx.publicId});
+    }
+  };
+
+  $scope.delete = function (tx) {
+    if (confirm("Are you sure to delete?")) {
+      transactionService.delete(tx).then(function() {
+        $scope.retrieve($scope.targetMonth, $scope.currency);
+      });
+    }
+  };
 
 };
 
-ctrl.$inject = ['$scope', 'transactionService', 'currencyService'];
+ctrl.$inject = ['$scope', '$state', 'transactionService', 'currencyService'];
 
 export default {
   name: 'TransactionsCtrl',
