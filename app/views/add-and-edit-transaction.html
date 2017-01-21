@@ -1,55 +1,52 @@
 <form role="form">
 
-  <div class="alert alert-success" ng-show="balance.amount">
-    <strong>Success!</strong> Balance is <strong>{{balance.amount | isoCurrency:balance.currency}}</strong>.
-  </div>
-
   <div class="form-group">
     <label class="control-label" for="amount">Amount</label>
-    <input type="number" class="form-control" id="amount" step="any" pattern="[0-9]+.[0-9]*" ng-model="newTx.amount">
+    <input type="number" class="form-control" id="amount" step="any" pattern="[0-9]+.[0-9]*" ng-model="currentTx.amount">
   </div>
 
   <div class="form-group">
     <label class="control-label" for="calendar">Date</label>
-    <input type="date" class="form-control" id="calendar" ng-model="newTx.calendar">
+    <input type="date" class="form-control" id="calendar" ng-model="currentTx.calendar">
   </div>
 
   <div class="form-group">
     <label class="control-label" for="category">Category</label>
-    <select class="form-control" name="category" id="category" ng-model="newTx.category">
-      <option ng-repeat="item in categoryList" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})</option>
+    <select class="form-control" name="category" id="category" ng-model="currentTx.category.publicId">
+      <option ng-repeat="item in categoryList" ng-value="item.publicId">{{item.name}}&nbsp;({{item.categoryApplyTo}})</option>
     </select>
   </div>
 
   <div class="form-group">
     <label>Description</label>
-    <textarea class="form-control" rows="3" ng-model="newTx.description"></textarea>
+    <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
   </div>
 
   <div class="form-group">
     <label class="control-label" for="place">Place</label>
-    <select class="form-control" name="place" id="place" ng-model="newTx.place">
+    <select class="form-control" name="place" id="place" ng-model="currentTx.place.publicId">
       <option ng-value="">--</option>
-      <option ng-repeat="item in placeList" ng-value="item">{{item.name}}</option>
+      <option ng-repeat="item in placeList" ng-value="item.publicId">{{item.name}}</option>
     </select>
   </div>
 
   <div class="form-group">
     <label class="control-label" for="event">Event</label>
-    <select class="form-control" name="event" id="event" ng-model="newTx.event">
+    <select class="form-control" name="event" id="event" ng-model="currentTx.event.publicId">
       <option ng-value="">--</option>
-      <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
+      <option ng-repeat="item in eventList" ng-value="item.publicId">{{item.name}}</option>
     </select>
   </div>
 
   <div class="form-group">
     <label class="control-label" for="currency">Currency</label>
-    <select class="form-control" name="currency" id="currency" ng-model="newTx.currency">
+    <select class="form-control" name="currency" id="currency" ng-model="currentTx.currency">
       <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
     </select>
   </div>
 
-  <button class="btn btn-primary" ng-click="submit(newTx)">Add</button>
+  <button ng-show="!isEditMode" class="btn btn-primary" ng-click="submit(currentTx)">Add</button>
+  <button ng-show="isEditMode" class="btn btn-info" ng-click="submit(currentTx)">Update</button>
+  <button ng-show="isEditMode" class="btn btn-basic" ng-click="cancel()">Cancel</button>
+
 </form>
-
-

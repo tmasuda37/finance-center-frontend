@@ -21,13 +21,25 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
   };
 
   $scope.edit = function (tx) {
-    if (confirm("Are you sure to edit?")) {
-      $state.go('addOrEditTransaction', {publicId: tx.publicId});
+    $state.go('addOrEditTransaction', {publicId: tx.publicId});
+  };
+
+  $scope.isEditMode = function () {
+    let retValue = false;
+
+    if ($scope.rowCollection && $scope.rowCollection.length !== 0) {
+      $scope.rowCollection.forEach(function (row) {
+        if (row.isEdit === true) {
+          retValue = true;
+        };
+      });
     }
+
+    return retValue;
   };
 
   $scope.delete = function (tx) {
-    if (confirm("Are you sure to delete?")) {
+    if (confirm('Are you sure to delete?')) {
       transactionService.delete(tx).then(function() {
         $scope.retrieve($scope.targetMonth, $scope.currency);
       });
