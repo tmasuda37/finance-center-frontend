@@ -37,13 +37,13 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       url: '/transactions',
       templateUrl: 'transactions.html',
       controller: 'TransactionsCtrl',
-      title: 'All transactions'
+      title: 'All Transactions'
     })
-    .state('addTransaction', {
-      url: '/add-transaction',
-      controller: 'AddTransactionCtrl',
-      templateUrl: 'add-transaction.html',
-      title: 'Add a new transaction'
+    .state('addOrEditTransaction', {
+      url: '/add-and-edit-transaction?/{publicId:int}',
+      controller: 'AddOrEditTransactionCtrl',
+      templateUrl: 'add-and-edit-transaction.html',
+      title: 'New Transaction'
     })
     .state('importCSV', {
       url: '/import-csv',
@@ -55,19 +55,19 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       url: '/categories',
       templateUrl: 'categories.html',
       controller: 'CategoriesCtrl',
-      title: 'Manage your categories'
+      title: 'Category List'
     })
     .state('events', {
       url: '/events',
       templateUrl: 'events.html',
       controller: 'EventsCtrl',
-      title: 'Manage your events'
+      title: 'Event List'
     })
     .state('places', {
       url: '/places',
       templateUrl: 'places.html',
       controller: 'PlacesCtrl',
-      title: 'Manage your places'
+      title: 'Place List'
     })
     .state('doLogout', {
       url: '/logout',

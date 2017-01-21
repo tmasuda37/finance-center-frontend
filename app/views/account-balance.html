@@ -1,4 +1,4 @@
-<div ng-repeat="item in wrappedList">
+<div ng-show="item.balance.length > 0" ng-repeat="item in wrappedList">
   <h3>{{item.currency}}</h3>
   <table class="table table-striped">
     <thead>

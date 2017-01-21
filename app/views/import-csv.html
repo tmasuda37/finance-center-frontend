@@ -14,30 +14,29 @@
       <tr>
         <th st-sort="calendar">Date</th>
         <th st-sort="category">Category</th>
-        <th st-sort="place">Place</th>
-        <th st-sort="event">Event</th>
+        <th st-sort="place" class="hide-for-small">Place</th>
+        <th st-sort="event" class="hide-for-small">Event</th>
         <th st-sort="currency">Currency</th>
         <th st-sort="amount">Amount</th>
-        <th st-sort="toExpense">To Expense?</th>
-        <th st-sort="description">Description</th>
+        <th st-sort="description" class="hide-for-small">Description</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="row in displayedCollection track by $index">
-        <td>{{row.calendar | date}}</td>
+        <td>{{row.calendar | date:'yyyy/MM/dd'}}</td>
         <td>
           <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category">
             <option ng-repeat="item in categoryList" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})
             </option>
           </select>
         </td>
-        <td>
+        <td class="hide-for-small">
           <select class="form-control" name="place{{$index}}" id="place{{$index}}" ng-model="row.place">
             <option ng-value="">--</option>
             <option ng-repeat="item in placeList" ng-value="item">{{item.name}}</option>
           </select>
         </td>
-        <td>
+        <td class="hide-for-small">
           <select class="form-control" name="event{{$index}}" id="event{{$index}}" ng-model="row.event">
             <option ng-value="">--</option>
             <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
@@ -48,8 +47,7 @@
             <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
           </select>
         <td>{{row.amount | isoCurrency:row.currency}}</td>
-        <td>{{row.toExpense}}</td>
-        <td>{{row.description}}</td>
+        <td class="hide-for-small">{{row.description}}</td>
       </tr>
     </tbody>
   </table>

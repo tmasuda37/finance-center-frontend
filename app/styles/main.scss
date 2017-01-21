@@ -225,3 +225,28 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+th.hide-for-small {
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+td.hide-for-small {
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+th.hide-for-large {
+  @media only screen and (min-width: 1024px) {
+    display: none;
+  }
+}
+
+td.hide-for-large {
+  @media only screen and (min-width: 1024px) {
+    display: none;
+  }
+}
+
