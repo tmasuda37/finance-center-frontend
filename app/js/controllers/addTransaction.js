@@ -1,6 +1,5 @@
 var ctrl = function ($scope, categoryService, currencyService, eventService, placeService, transactionService) {
 
-  // todo: Loading Default Configuration
   $scope.newTx = {
     calendar: new Date()
   };
@@ -15,6 +14,10 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
     $scope.currencyList = data;
   });
 
+  currencyService.defaultCurrency().then(function(data) {
+    $scope.newTx.currency = data;
+  });
+
   eventService.defaultList().then(function(data) {
     $scope.eventList = data;
   });
@@ -27,12 +30,13 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
     transactionService.create(data).then(
       function(response) {
         $scope.newTx = {
-          calendar: new Date()
+          calendar: new Date(),
+          currency: $scope.currency
         };
 
         $scope.balance = {
           amount: response.amount,
-          currency: response.anAccountBalanceKey.currency
+          currency: response.currency
         };
       }, function(error) {
         console.error(error);
