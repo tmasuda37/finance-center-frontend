@@ -40,7 +40,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       title: 'All Transactions'
     })
     .state('addOrEditTransaction', {
-      url: '/add-and-edit-transaction?/{publicId:int}',
+      url: '/add-edit-transaction?/{publicId:int}',
       controller: 'AddOrEditTransactionCtrl',
       templateUrl: 'add-and-edit-transaction.html',
       title: 'New Transaction'

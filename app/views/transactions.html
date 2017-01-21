@@ -17,22 +17,18 @@
   <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
     <thead>
       <tr>
-        <th></th>
         <th st-sort="calendar" st-sort-default="reverse" reverse>Date</th>
         <th st-sort="category.name">Category</th>
         <th st-sort="place.name" class="hide-for-small">Place</th>
         <th st-sort="event.name" class="hide-for-small">Event</th>
         <th st-sort="amount">Amount</th>
-        <th st-sort="description" class="hide-for-small">Description</th>
-        <th class="hide-for-large">Info</th>
+        <th ng-show="!isEditMode()" st-sort="description" class="hide-for-small">Description</th>
+        <th ng-show="!isEditMode()" class="hide-for-large">Info</th>
+        <th ng-show="isEditMode()">Edit/Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in displayedCollection">
-        <td>
-          <button class="btn btn-warning btn-xs" ng-click="edit(row)">Edit</button>
-          <button class="btn btn-danger btn-xs" ng-click="delete(row)">Delete</button>
-        </td>
+      <tr ng-repeat="row in displayedCollection" ng-click="row.isEdit = !row.isEdit">
         <td>{{row.calendar | date:'MM/dd'}}</td>
         <td>{{row.category.name}}</td>
         <td class="hide-for-small">{{row.place.name}}</td>
@@ -40,19 +36,24 @@
         <td>
           {{row.amount | isoCurrency:row.currency}}
         </td>
-        <td class="hide-for-small">{{row.description}}</td>
-        <td class="hide-for-large">
+        <td ng-show="!row.isEdit" class="hide-for-small">{{row.description}}</td>
+        <td ng-show="!row.isEdit" class="hide-for-large">
           <i class="fa fa-fw fa-info-circle"
              ng-show="row.description"
              popover-placement="left"
              uib-popover="{{row.description}}"
-             popover-trigger="'mouseenter'"></i>
+             popover-trigger="'mouseenter'">
+          </i>
+        </td>
+        <td ng-show="row.isEdit">
+          <button class="btn btn-warning btn-xs" ng-click="edit(row)">Edit</button>
+          <button class="btn btn-danger btn-xs" ng-click="delete(row)">Delete</button>
         </td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="5" class="text-center">
+        <td colspan="8" class="text-center">
           <div st-pagination="" st-items-by-page="itemPerPage" st-displayed-pages=""></div>
         </td>
       </tr>
