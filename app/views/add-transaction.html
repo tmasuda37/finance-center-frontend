@@ -15,7 +15,7 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="calendar">Category</label>
+    <label class="control-label" for="category">Category</label>
     <select class="form-control" name="category" id="category" ng-model="newTx.category">
       <option ng-repeat="item in categoryList" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})</option>
     </select>
@@ -31,6 +31,7 @@
   <div class="form-group">
     <label class="control-label" for="place">Place</label>
     <select class="form-control" name="place" id="place" ng-model="newTx.place">
+      <option ng-value="">--</option>
       <option ng-repeat="item in placeList" ng-value="item">{{item.name}}</option>
     </select>
   </div>
@@ -38,6 +39,7 @@
   <div class="form-group">
     <label class="control-label" for="event">Event</label>
     <select class="form-control" name="event" id="event" ng-model="newTx.event">
+      <option ng-value="">--</option>
       <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
     </select>
   </div>

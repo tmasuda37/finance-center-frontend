@@ -65,7 +65,7 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
       }
 
       importedItems.push({
-        calendar: new Date(dateInfo[2], dateInfo[1], dateInfo[0]),
+        calendar: new Date(dateInfo[2], dateInfo[1]-1, dateInfo[0]),
         category: $scope.categoryList[0],
         currency: $scope.currencyList[0],
         amount: Math.abs(values[3]),

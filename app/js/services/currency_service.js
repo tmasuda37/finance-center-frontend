@@ -7,6 +7,10 @@ function service(transportService) {
     return transportService.send('GET', 'currency/list')
   };
 
+  service.defaultCurrency = function () {
+    return transportService.send('GET', 'currency/default')
+  };
+
   return service;
 }
 
