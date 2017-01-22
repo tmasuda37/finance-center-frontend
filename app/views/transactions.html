@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in displayedCollection" ng-click="row.isEdit = !row.isEdit">
+      <tr ng-repeat="row in displayedCollection" ng-click="row.isEdit = !row.isEdit" ng-class="{income: !row.category.toExpense}">
         <td>{{row.calendar | date:'MM/dd'}}</td>
         <td>{{row.category.name}}</td>
         <td class="hide-for-small">{{row.place.name}}</td>

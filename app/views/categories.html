@@ -5,15 +5,15 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="name">Name</label>
-    <input type="text" class="form-control" id="name" ng-model="newCategory.name">
+    <label class="control-label" for="categoryApplyToList">Category Apply To</label>
+    <select class="form-control" name="categoryApplyToList" id="categoryApplyToList" ng-model="newCategory.categoryApplyTo" ng-change="fetch(newCategory.categoryApplyTo)">
+      <option ng-repeat="item in categoryApplyToList" ng-value="item">{{item}}</option>
+    </select>
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="categoryApplyToList">Category Apply To</label>
-    <select class="form-control" name="categoryApplyToList" id="categoryApplyToList" ng-model="newCategory.categoryApplyTo">
-      <option ng-repeat="item in categoryApplyToList" ng-value="item">{{item}}</option>
-    </select>
+    <label class="control-label" for="name">Name</label>
+    <input type="text" class="form-control" id="name" ng-model="newCategory.name">
   </div>
 
   <div class="form-group">

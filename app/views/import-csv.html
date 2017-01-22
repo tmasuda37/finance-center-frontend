@@ -29,23 +29,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in displayedCollection track by $index">
+      <tr ng-repeat="row in displayedCollection track by $index" ng-class="{income: !row.toExpense}">
         <td>{{row.calendar | date:'yyyy/MM/dd'}}</td>
         <td>
-          <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category">
-            <option ng-repeat="item in categoryList" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})
+          <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category" required>
+            <option ng-repeat="item in categoryList | filter: filterByCategoryApplyTo(item, row)" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})
             </option>
           </select>
         </td>
         <td class="hide-for-small">
           <select class="form-control" name="place{{$index}}" id="place{{$index}}" ng-model="row.place">
-            <option ng-value="">--</option>
+            <option value="">--</option>
             <option ng-repeat="item in placeList" ng-value="item">{{item.name}}</option>
           </select>
         </td>
         <td class="hide-for-small">
           <select class="form-control" name="event{{$index}}" id="event{{$index}}" ng-model="row.event">
-            <option ng-value="">--</option>
+            <option value="">--</option>
             <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
           </select>
         </td>

@@ -1,8 +1,17 @@
 <form role="form">
 
   <div class="form-group">
+    <label class="control-label" for="categoryApplyToList">Category Apply To</label>
+    <select class="form-control" name="categoryApplyToList" id="categoryApplyToList"
+            ng-model="currentTx.category.categoryApplyTo">
+      <option ng-repeat="item in categoryApplyToList" ng-value="item">{{item}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label class="control-label" for="amount">Amount</label>
-    <input type="number" class="form-control" id="amount" step="any" pattern="[0-9]+.[0-9]*" ng-model="currentTx.amount">
+    <input type="number" class="form-control" id="amount" step="any" pattern="[0-9]+.[0-9]*"
+           ng-model="currentTx.amount">
   </div>
 
   <div class="form-group">
@@ -13,7 +22,8 @@
   <div class="form-group">
     <label class="control-label" for="category">Category</label>
     <select class="form-control" name="category" id="category" ng-model="currentTx.category.publicId">
-      <option ng-repeat="item in categoryList" ng-value="item.publicId">{{item.name}}&nbsp;({{item.categoryApplyTo}})</option>
+      <option ng-repeat="item in categoryList | filter: filterByCategoryApplyTo" ng-value="item.publicId">{{item.name}}&nbsp;({{item.categoryApplyTo}})
+      </option>
     </select>
   </div>
 
@@ -25,7 +35,7 @@
   <div class="form-group">
     <label class="control-label" for="place">Place</label>
     <select class="form-control" name="place" id="place" ng-model="currentTx.place.publicId">
-      <option ng-value="">--</option>
+      <option value="">--</option>
       <option ng-repeat="item in placeList" ng-value="item.publicId">{{item.name}}</option>
     </select>
   </div>
@@ -33,7 +43,7 @@
   <div class="form-group">
     <label class="control-label" for="event">Event</label>
     <select class="form-control" name="event" id="event" ng-model="currentTx.event.publicId">
-      <option ng-value="">--</option>
+      <option value="">--</option>
       <option ng-repeat="item in eventList" ng-value="item.publicId">{{item.name}}</option>
     </select>
   </div>

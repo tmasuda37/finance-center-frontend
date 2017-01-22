@@ -1,7 +1,8 @@
 var ctrl = function ($scope, categoryService) {
 
-  $scope.fetch = function () {
-    categoryService.defaultList().then(function(data) {
+  $scope.fetch = function (categoryApplyTo) {
+    const request = { categoryApplyTo };
+    categoryService.getList(request).then(function(data) {
       $scope.rowCollection = data;
     });
   };
@@ -13,11 +14,12 @@ var ctrl = function ($scope, categoryService) {
   $scope.submit = function (data) {
     categoryService.create(data).then(
       function() {
+        $scope.fetch($scope.newCategory.categoryApplyTo);
+
         $scope.newCategory = {
           name: ''
         };
 
-        $scope.fetch();
         $scope.status = 'completed';
 
       }, function(error) {
@@ -26,8 +28,6 @@ var ctrl = function ($scope, categoryService) {
         console.error(error);
       });
   };
-
-  $scope.fetch();
 
   $scope.newCategory = {
     name: ''
