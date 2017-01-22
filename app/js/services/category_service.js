@@ -7,12 +7,8 @@ function service(transportService) {
     return transportService.send('POST', 'category/create', data)
   };
 
-  service.getList = function (data) {
-    return transportService.send('POST', 'category/list', data)
-  };
-
-  service.getCategoryApplyToList = function () {
-    return transportService.send('GET', 'category/apply-to-list')
+  service.getList = function () {
+    return transportService.send('GET', 'category/list')
   };
 
   return service;

@@ -5,13 +5,6 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="categoryApplyToList">Category Apply To</label>
-    <select class="form-control" name="categoryApplyToList" id="categoryApplyToList" ng-model="newCategory.categoryApplyTo" ng-change="fetch(newCategory.categoryApplyTo)">
-      <option ng-repeat="item in categoryApplyToList" ng-value="item">{{item}}</option>
-    </select>
-  </div>
-
-  <div class="form-group">
     <label class="control-label" for="name">Name</label>
     <input type="text" class="form-control" id="name" ng-model="newCategory.name">
   </div>
@@ -20,12 +13,12 @@
     <label>To Expense?</label>
     <div class="radio">
       <label>
-        <input type="radio" name="toExpense1" id="toExpense1" ng-model="newCategory.toExpense" value="true">True
+        <input type="radio" name="toExpense1" id="toExpense1" ng-model="newCategory.toExpense" ng-value="true">True
       </label>
     </div>
     <div class="radio">
       <label>
-        <input type="radio" name="toExpense2" id="toExpense2" ng-model="newCategory.toExpense" value="false">False
+        <input type="radio" name="toExpense2" id="toExpense2" ng-model="newCategory.toExpense" ng-value="false">False
       </label>
     </div>
   </div>
@@ -37,14 +30,12 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Apply to</th>
       <th>To Expense?</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="row in rowCollection">
       <td>{{row.name}}</td>
-      <td>{{row.categoryApplyTo}}</td>
       <td>{{row.toExpense}}</td>
     </tr>
   </tbody>

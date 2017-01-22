@@ -12,7 +12,9 @@
     <input type="file" file-upload="importFile">
   </div>
 
-  <button class="btn btn-primary" ng-click="submit()" ng-disabled="!rowCollection || rowCollection.length === 0">Import</button>
+  <button class="btn btn-primary" ng-click="submit()" ng-disabled="!rowCollection || rowCollection.length === 0">
+    Import
+  </button>
 
   <hr/>
 
@@ -32,8 +34,9 @@
       <tr ng-repeat="row in displayedCollection track by $index" ng-class="{income: !row.toExpense}">
         <td>{{row.calendar | date:'yyyy/MM/dd'}}</td>
         <td>
-          <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category" required>
-            <option ng-repeat="item in categoryList | filter: filterByCategoryApplyTo(item, row)" ng-value="item">{{item.name}}&nbsp;({{item.categoryApplyTo}})
+          <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category">
+            <option ng-repeat="item in categoryList | filter: filterByApplyTo(item, row)" ng-value="item">
+              {{item.name}}
             </option>
           </select>
         </td>

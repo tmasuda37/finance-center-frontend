@@ -3,13 +3,13 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Category Apply To</th>
+        <th>Apply To</th>
         <th>Amount</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="row in item.balance">
-        <td>{{row.categoryApplyTo}}</td>
+        <td>{{row.applyTo}}</td>
         <td>{{row.amount | isoCurrency:row.currency}}</td>
       </tr>
     </tbody>

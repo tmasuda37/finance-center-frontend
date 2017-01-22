@@ -3,6 +3,10 @@ function service(transportService) {
 
   const service = {};
 
+  service.getApplyToList = function () {
+    return transportService.send('GET', 'transaction/apply-to-list')
+  };
+
   service.create = function (data) {
     return transportService.send('POST', 'transaction/create', data)
   };
