@@ -2,33 +2,45 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
 
   $scope.isEditMode = $stateParam.publicId;
 
-  const promise1 = categoryService.defaultList();
-  $q.when(promise1, function (data) {
-    $scope.categoryList = data;
+  const categoryApplyToPromise = categoryService.getCategoryApplyToList();
+  $q.when(categoryApplyToPromise, function(categoryApplyToList) {
+    $scope.categoryApplyToList = categoryApplyToList;
+    $scope.categoryList = [];
+
+    categoryApplyToList.forEach(function (categoryApplyTo) {
+      var request = {categoryApplyTo};
+      const categoryPromise = categoryService.getList(request);
+      $q.when(categoryPromise, function (data) {
+        data.forEach(function (item) {
+          $scope.categoryList.push(item);;
+        });
+      });
+    });
+
   });
 
-  const promise2 = currencyService.defaultList();
-  $q.when(promise2, function(data) {
+  const currencyPromise = currencyService.defaultList();
+  $q.when(currencyPromise, function(data) {
     $scope.currencyList = data;
   });
 
-  const promise3 = eventService.defaultList()
-  $q.when(promise3, function(data) {
+  const eventPromise = eventService.defaultList()
+  $q.when(eventPromise, function(data) {
     $scope.eventList = data;
   });
 
-  const promise4 = placeService.defaultList()
-  promise4.then(function(data) {
+  const placePromise = placeService.defaultList()
+  $q.when(placePromise, function(data) {
     $scope.placeList = data;
   });
 
   $scope.currentTx = {};
 
   $q.all([
-    promise1,
-    promise2,
-    promise3,
-    promise4
+    categoryApplyToPromise,
+    currencyPromise,
+    eventPromise,
+    placePromise
   ]).then(function() {
     if ($scope.isEditMode) {
       var request = {publicId: $stateParam.publicId};
@@ -43,6 +55,15 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
       });
     }
   });
+
+  $scope.filterByCategoryApplyTo = function (item) {
+    if ($scope.currentTx.category) {
+      return item.categoryApplyTo === $scope.currentTx.category.categoryApplyTo;
+    } else {
+      $scope.currentTx.category = null;
+      return false;
+    }
+  };
 
   $scope.submit = function (data) {
     transactionService.create(data).then(

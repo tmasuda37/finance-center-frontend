@@ -2,7 +2,8 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
   var reader = new FileReader();
 
-  categoryService.defaultList().then(function(data) {
+  const request = { categoryApplyTo: 'Bank' };
+  categoryService.getList(request).then(function(data) {
     $scope.categoryList = data;
   });
 
@@ -70,7 +71,7 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
       importedItems.push({
         calendar: new Date(dateInfo[2], dateInfo[1]-1, dateInfo[0]),
-        category: $scope.categoryList[0],
+        category: null,
         currency: $scope.currency,
         amount: Math.abs(values[3]),
         toExpense: values[3] < 0,
@@ -80,15 +81,19 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
     transactionService.duplicateCheck(importedItems).then(
       function(checkedData) {
-        checkedData.forEach(function(item) {
-          item.category = $scope.categoryList[0];
-        });
         $scope.rowCollection = checkedData;
       }, function(error) {
         console.error(error);
       });
 
     $scope.$apply();
+  };
+
+  //todo: revisit this logic
+  $scope.filterByCategoryApplyTo = function (dummy, row) {
+    return function (item) {
+      return item.toExpense === row.toExpense;
+    }
   };
 
   $scope.submit = function () {
