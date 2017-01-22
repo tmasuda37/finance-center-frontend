@@ -36,7 +36,7 @@
         <td>
           <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category">
             <option ng-repeat="item in categoryList | filter: filterByApplyTo(item, row)" ng-value="item">
-              {{item.name}}
+              {{$index}} - {{item.name}}
             </option>
           </select>
         </td>

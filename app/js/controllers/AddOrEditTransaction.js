@@ -50,6 +50,10 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
     }
   });
 
+  $scope.filterByApplyTo = function (item) {
+    return item.toExpense === $scope.toExpense;
+  };
+
   $scope.submit = function (data) {
     transactionService.create(data).then(
       function() {
