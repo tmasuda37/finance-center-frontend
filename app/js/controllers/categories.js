@@ -1,23 +1,24 @@
 var ctrl = function ($scope, categoryService) {
 
-  $scope.fetch = function (categoryApplyTo) {
-    const request = { categoryApplyTo };
-    categoryService.getList(request).then(function(data) {
+  $scope.newCategory = {
+    name: '',
+    toExpense: true
+  };
+
+  $scope.fetch = function () {
+    categoryService.getList().then(function(data) {
       $scope.rowCollection = data;
     });
   };
 
-  categoryService.getCategoryApplyToList().then(function(data) {
-    $scope.categoryApplyToList = data;
-  });
-
   $scope.submit = function (data) {
     categoryService.create(data).then(
       function() {
-        $scope.fetch($scope.newCategory.categoryApplyTo);
+        $scope.fetch();
 
         $scope.newCategory = {
-          name: ''
+          name: '',
+          toExpense: true
         };
 
         $scope.status = 'completed';
@@ -29,9 +30,7 @@ var ctrl = function ($scope, categoryService) {
       });
   };
 
-  $scope.newCategory = {
-    name: ''
-  };
+  $scope.fetch();
 
   $scope.status = 'init';
 

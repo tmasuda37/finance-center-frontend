@@ -1,11 +1,24 @@
 <form role="form">
 
   <div class="form-group">
-    <label class="control-label" for="categoryApplyToList">Category Apply To</label>
-    <select class="form-control" name="categoryApplyToList" id="categoryApplyToList"
-            ng-model="currentTx.category.categoryApplyTo">
-      <option ng-repeat="item in categoryApplyToList" ng-value="item">{{item}}</option>
+    <label class="control-label" for="applyToList">Apply To</label>
+    <select class="form-control" name="applyToList" id="applyToList" ng-model="currentTx.applyTo">
+      <option ng-repeat="item in applyToList" ng-value="item">{{item}}</option>
     </select>
+  </div>
+
+  <div class="form-group">
+    <label>To Expense?</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="toExpense1" id="toExpense1" ng-model="toExpense" ng-value="true">True
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="toExpense2" id="toExpense2" ng-model="toExpense" ng-value="false">False
+      </label>
+    </div>
   </div>
 
   <div class="form-group">
@@ -22,8 +35,7 @@
   <div class="form-group">
     <label class="control-label" for="category">Category</label>
     <select class="form-control" name="category" id="category" ng-model="currentTx.category.publicId">
-      <option ng-repeat="item in categoryList | filter: filterByCategoryApplyTo" ng-value="item.publicId">{{item.name}}&nbsp;({{item.categoryApplyTo}})
-      </option>
+      <option ng-repeat="item in categoryList | filter: filterByApplyTo" ng-value="item.publicId">{{$index}} - {{item.name}}</option>
     </select>
   </div>
 

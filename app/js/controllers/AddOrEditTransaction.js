@@ -2,21 +2,14 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
 
   $scope.isEditMode = $stateParam.publicId;
 
-  const categoryApplyToPromise = categoryService.getCategoryApplyToList();
-  $q.when(categoryApplyToPromise, function(categoryApplyToList) {
-    $scope.categoryApplyToList = categoryApplyToList;
-    $scope.categoryList = [];
+  const applyToPromise = transactionService.getApplyToList();
+  $q.when(applyToPromise, function(data) {
+    $scope.applyToList = data;
+  });
 
-    categoryApplyToList.forEach(function (categoryApplyTo) {
-      var request = {categoryApplyTo};
-      const categoryPromise = categoryService.getList(request);
-      $q.when(categoryPromise, function (data) {
-        data.forEach(function (item) {
-          $scope.categoryList.push(item);;
-        });
-      });
-    });
-
+  const categoryPromise = categoryService.getList();
+  $q.when(categoryPromise, function (data) {
+    $scope.categoryList = data;
   });
 
   const currencyPromise = currencyService.defaultList();
@@ -37,7 +30,8 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
   $scope.currentTx = {};
 
   $q.all([
-    categoryApplyToPromise,
+    applyToPromise,
+    categoryPromise,
     currencyPromise,
     eventPromise,
     placePromise
@@ -56,13 +50,8 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
     }
   });
 
-  $scope.filterByCategoryApplyTo = function (item) {
-    if ($scope.currentTx.category) {
-      return item.categoryApplyTo === $scope.currentTx.category.categoryApplyTo;
-    } else {
-      $scope.currentTx.category = null;
-      return false;
-    }
+  $scope.filterByApplyTo = function (item) {
+    return item.toExpense === $scope.toExpense;
   };
 
   $scope.submit = function (data) {
