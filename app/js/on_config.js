@@ -51,6 +51,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       templateUrl: 'import-csv.html',
       title: 'Import CSV'
     })
+    .state('houseHold', {
+      url: '/house-hold',
+      templateUrl: 'house-hold.html',
+      controller: 'HouseHoldCtrl',
+      title: 'House Hold'
+    })
     .state('categories', {
       url: '/categories',
       templateUrl: 'categories.html',

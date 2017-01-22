@@ -8,6 +8,10 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
   currencyService.defaultList().then(function(data) {
     $scope.currencyList = data;
+
+    currencyService.defaultCurrency().then(function(data) {
+      $scope.currency = data;
+    });
   });
 
   eventService.defaultList().then(function(data) {
@@ -67,14 +71,22 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
       importedItems.push({
         calendar: new Date(dateInfo[2], dateInfo[1]-1, dateInfo[0]),
         category: $scope.categoryList[0],
-        currency: $scope.currencyList[0],
+        currency: $scope.currency,
         amount: Math.abs(values[3]),
         toExpense: values[3] < 0,
         description
       });
     })
 
-    $scope.rowCollection = importedItems;
+    transactionService.duplicateCheck(importedItems).then(
+      function(checkedData) {
+        checkedData.forEach(function(item) {
+          item.category = $scope.categoryList[0];
+        });
+        $scope.rowCollection = checkedData;
+      }, function(error) {
+        console.error(error);
+      });
 
     $scope.$apply();
   };

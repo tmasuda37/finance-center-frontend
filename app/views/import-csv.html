@@ -1,11 +1,18 @@
 <form role="form">
 
   <div class="form-group">
+    <label class="control-label" for="currency">Currency</label>
+    <select class="form-control" name="currency" id="currency" ng-model="currency">
+      <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label>File input</label>
     <input type="file" file-upload="importFile">
   </div>
 
-  <button class="btn btn-primary" ng-click="submit()">Import</button>
+  <button class="btn btn-primary" ng-click="submit()" ng-disabled="!rowCollection || rowCollection.length === 0">Import</button>
 
   <hr/>
 
