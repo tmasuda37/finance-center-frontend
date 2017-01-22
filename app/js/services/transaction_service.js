@@ -11,6 +11,10 @@ function service(transportService) {
     return transportService.send('POST', 'transaction/createAll', data)
   };
 
+  service.duplicateCheck = function (data) {
+    return transportService.send('POST', 'transaction/duplicateCheck', data)
+  };
+
   service.defaultList = function (data) {
     return transportService.send('POST', 'transaction/list', data);
   };

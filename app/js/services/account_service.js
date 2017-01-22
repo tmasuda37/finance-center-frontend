@@ -7,6 +7,14 @@ function service(transportService) {
     return transportService.send('POST', 'account/create')
   };
 
+  service.retrieveHouseHold = function () {
+    return transportService.send('GET', 'account/retrieve')
+  };
+
+  service.updateHouseHold = function (data) {
+    return transportService.send('POST', 'account/update', data)
+  };
+
   return service;
 }
 
