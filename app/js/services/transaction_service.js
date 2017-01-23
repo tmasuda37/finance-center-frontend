@@ -19,8 +19,12 @@ function service(transportService) {
     return transportService.send('POST', 'transaction/duplicateCheck', data)
   };
 
-  service.defaultList = function (data) {
-    return transportService.send('POST', 'transaction/list', data);
+  service.listForAccount = function (data) {
+    return transportService.send('POST', 'transaction/list-for-account', data);
+  };
+
+  service.listForHouseHold = function (data) {
+    return transportService.send('POST', 'transaction/list-for-house-hold', data);
   };
 
   service.retrieve = function (data) {

@@ -44,13 +44,25 @@
               <a ui-sref="importCSV"><i class="fa fa-fw fa-upload"></i>&nbsp;Import CSV</a>
             </li>
             <li>
-              <a ui-sref="transactions"><i class="fa fa-fw fa-list-ol"></i>&nbsp;Transactions</a>
+              <a ui-sref="accountTransactions"><i class="fa fa-fw fa-list-ol"></i>&nbsp;Transactions</a>
             </li>
             <li>
               <a ui-sref="accountBalance"><i class="fa fa-fw fa-book"></i>&nbsp;Account Balance</a>
             </li>
             <li>
               <a ui-sref="accountMonthlyBalance"><i class="fa fa-fw fa-book"></i>&nbsp;Monthly Balance</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:;" data-toggle="collapse" data-target="#houseHoldLevel"><i class="fa fa-fw fa-arrows-v"></i>
+            House Hold Level <i class="fa fa-fw fa-caret-down"></i></a>
+          <ul id="houseHoldLevel" class="collapse">
+            <li>
+              <a ui-sref="houseHoldTransactions"><i class="fa fa-fw fa-list-ol"></i>&nbsp;Transactions</a>
+            </li>
+            <li>
+              <a ui-sref="houseHoldMonthlyBalance"><i class="fa fa-fw fa-book"></i>&nbsp;Monthly Balance</a>
             </li>
           </ul>
         </li>

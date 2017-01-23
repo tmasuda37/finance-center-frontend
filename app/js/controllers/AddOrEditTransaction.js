@@ -70,7 +70,7 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
   };
 
   $scope.cancel = function () {
-    $state.go('transactions');
+    $state.go('accountTransactions');
   };
 
 };

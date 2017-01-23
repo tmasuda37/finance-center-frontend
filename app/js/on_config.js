@@ -21,24 +21,6 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       url: '/add-account',
       controller: 'AddAccountCtrl'
     })
-    .state('accountBalance', {
-      url: '/account-balance',
-      templateUrl: 'account-balance.html',
-      controller: 'AccountBalanceCtrl',
-      title: 'Account Balance'
-    })
-    .state('accountMonthlyBalance', {
-      url: '/account-monthly-balance',
-      templateUrl: 'account-monthly-balance.html',
-      controller: 'AccountMonthlyBalanceCtrl',
-      title: 'Account Monthly Balance'
-    })
-    .state('transactions', {
-      url: '/transactions',
-      templateUrl: 'transactions.html',
-      controller: 'TransactionsCtrl',
-      title: 'All Transactions'
-    })
     .state('addOrEditTransaction', {
       url: '/add-edit-transaction?/{publicId:int}',
       controller: 'AddOrEditTransactionCtrl',
@@ -50,6 +32,36 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       controller: 'ImportCSVCtrl',
       templateUrl: 'import-csv.html',
       title: 'Import CSV'
+    })
+    .state('accountTransactions', {
+      url: '/account-transactions',
+      templateUrl: 'transactions.html',
+      controller: 'TransactionsCtrl',
+      title: 'Account Transactions'
+    })
+    .state('accountBalance', {
+      url: '/account-balance',
+      templateUrl: 'account-balance.html',
+      controller: 'AccountBalanceCtrl',
+      title: 'Account Balance'
+    })
+    .state('accountMonthlyBalance', {
+      url: '/account-monthly-balance',
+      templateUrl: 'monthly-balance.html',
+      controller: 'MonthlyBalanceCtrl',
+      title: 'Account Monthly Balance'
+    })
+    .state('houseHoldTransactions', {
+      url: '/house-hold-transactions',
+      templateUrl: 'transactions.html',
+      controller: 'TransactionsCtrl',
+      title: 'House Hold Transactions'
+    })
+    .state('houseHoldMonthlyBalance', {
+      url: '/house-hold-monthly-balance',
+      templateUrl: 'monthly-balance.html',
+      controller: 'MonthlyBalanceCtrl',
+      title: 'House Hold Monthly Balance'
     })
     .state('houseHold', {
       url: '/house-hold',
