@@ -8,7 +8,13 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
 
       currencyList.forEach(function (currency)  {
         const request = {calendar, currency};
-        const promise = summaryService.getMonthlyHouseHoldBalance(request);
+        let promise = {};
+
+        if ($state.current.name === 'accountMonthlyBalance') {
+          promise = summaryService.getMonthlyAccountBalance(request);
+        } else {
+          promise = summaryService.getMonthlyHouseHoldBalance(request);
+        }
 
         promise.then(function(monthlyBalance) {
           const item = {
