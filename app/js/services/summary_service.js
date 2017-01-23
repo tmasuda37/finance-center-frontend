@@ -7,10 +7,6 @@ function service(transportService) {
     return transportService.send('POST', 'summary/balance', data)
   };
 
-  service.getMonthlyAccountBalance = function (data) {
-    return transportService.send('POST', 'summary/monthly-account-balance', data)
-  };
-
   service.getMonthlyHouseHoldBalance = function (data) {
     return transportService.send('POST', 'summary/monthly-house-hold-balance', data)
   };
