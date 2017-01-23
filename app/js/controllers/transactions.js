@@ -15,9 +15,15 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
 
   $scope.retrieve = function (calendar, currency) {
     var request = {calendar, currency};
-    transactionService.defaultList(request).then(function(data) {
-      $scope.rowCollection = data;
-    });
+    if ($state.current.name === 'accountTransactions') {
+      transactionService.listForAccount(request).then(function(data) {
+        $scope.rowCollection = data;
+      });
+    } else {
+      transactionService.listForHouseHold(request).then(function(data) {
+        $scope.rowCollection = data;
+      });
+    }
   };
 
   $scope.edit = function (tx) {

@@ -43,13 +43,17 @@
         <td class="hide-for-small">
           <select class="form-control" name="place{{$index}}" id="place{{$index}}" ng-model="row.place">
             <option value="">--</option>
-            <option ng-repeat="item in placeList" ng-value="item">{{item.name}}</option>
+            <option ng-repeat="item in placeList" ng-value="item">
+              {{$index}} - {{item.name}}
+            </option>
           </select>
         </td>
         <td class="hide-for-small">
           <select class="form-control" name="event{{$index}}" id="event{{$index}}" ng-model="row.event">
             <option value="">--</option>
-            <option ng-repeat="item in eventList" ng-value="item">{{item.name}}</option>
+            <option ng-repeat="item in eventList" ng-value="item">
+              {{$index}} - {{item.name}}
+            </option>
           </select>
         </td>
         <td>
