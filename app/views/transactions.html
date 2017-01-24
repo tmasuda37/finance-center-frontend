@@ -28,12 +28,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in displayedCollection" ng-click="row.isEdit = !row.isEdit" ng-class="{income: !row.category.toExpense}">
+      <tr ng-repeat="row in displayedCollection" ng-class="{income: !row.category.toExpense}">
         <td>{{row.calendar | date:'MM/dd'}}</td>
         <td>{{row.category.name}}</td>
         <td class="hide-for-small">{{row.place.name}}</td>
         <td class="hide-for-small">{{row.event.name}}</td>
-        <td>
+        <td ng-click="enableEdit(row)">
           {{row.amount | isoCurrency:row.currency}}
         </td>
         <td ng-show="!row.isEdit" class="hide-for-small">{{row.description}}</td>
@@ -46,8 +46,8 @@
           </i>
         </td>
         <td ng-show="row.isEdit">
-          <button class="btn btn-warning btn-xs" ng-click="edit(row)">Edit</button>
-          <button class="btn btn-danger btn-xs" ng-click="delete(row)">Delete</button>
+          <button class="btn btn-warning btn-lg" ng-click="edit(row)">Edit</button>
+          <button class="btn btn-danger btn-lg" ng-click="delete(row)">Delete</button>
         </td>
       </tr>
     </tbody>

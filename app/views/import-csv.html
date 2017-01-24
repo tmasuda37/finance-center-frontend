@@ -58,7 +58,9 @@
         </td>
         <td>
           <select class="form-control" name="currency{{$index}}" id="currency{{$index}}" ng-model="row.currency">
-            <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
+            <option ng-repeat="item in currencyList" ng-value="item">
+              {{$index}} - {{item}}
+            </option>
           </select>
         <td>{{row.amount | isoCurrency:row.currency}}</td>
         <td class="hide-for-small">{{row.description}}</td>
