@@ -41,6 +41,7 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
       transactionService.retrieve(request).then(function(data) {
         data.calendar = new Date(data.calendar);
         $scope.currentTx = data;
+        $scope.toExpense = data.category.toExpense;
       });
     } else {
       $scope.currentTx.calendar = new Date();
@@ -63,6 +64,7 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
           $scope.currentTx = {
             calendar: new Date()
           };
+          $scope.toExpense = undefined;
         }
       }, function(error) {
         console.error(error);
