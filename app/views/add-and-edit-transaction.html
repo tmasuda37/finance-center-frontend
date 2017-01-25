@@ -1,80 +1,84 @@
 <form role="form">
 
   <div class="form-group">
-    <label class="control-label" for="applyToList">Apply To</label>
-    <select class="form-control" name="applyToList" id="applyToList" ng-model="currentTx.applyTo">
-      <option ng-repeat="item in applyToList" ng-value="item">
-        {{$index}} - {{item}}
-      </option>
-    </select>
+    <span ng-repeat="item in applyToList">
+      <button class="btn btn-default btn-lg"
+              ng-click="currentTx.applyTo = item"
+              ng-class="{'btn-warning': currentTx.applyTo === item}">
+        {{item}}
+      </button>
+    </span>
   </div>
 
   <div class="form-group">
-    <label>To Expense?</label>
-    <div class="radio">
-      <label>
-        <input type="radio" name="toExpense1" id="toExpense1" ng-model="toExpense" ng-value="true">True
-      </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="toExpense2" id="toExpense2" ng-model="toExpense" ng-value="false">False
-      </label>
-    </div>
+    <button class="btn btn-default btn-lg"
+            ng-model="toExpense"
+            ng-click="toExpense = true"
+            ng-class="{'btn-danger': toExpense === true}">
+      Expense
+    </button>
+    <button class="btn btn-default btn-lg"
+            ng-model="toExpense"
+            ng-click="toExpense = false"
+            ng-class="{'btn-info': toExpense === false}">
+      Income
+    </button>
   </div>
 
-  <div class="form-group">
+  <div class="form-group form-group-lg">
     <label class="control-label" for="amount">Amount</label>
-    <input type="number" class="form-control" id="amount" step="any" pattern="[0-9]+.[0-9]*"
+    <input type="number" class="form-control" id="amount" step="any" pattern="\d*"
            ng-model="currentTx.amount">
   </div>
 
-  <div class="form-group">
+  <div class="form-group form-group-lg">
     <label class="control-label" for="calendar">Date</label>
     <input type="date" class="form-control" id="calendar" ng-model="currentTx.calendar">
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="category">Category</label>
-    <select class="form-control" name="category" id="category" ng-model="currentTx.category.publicId">
-      <option ng-repeat="item in categoryList | filter: filterByApplyTo" ng-value="item.publicId">
-        {{$index}} - {{item.name}}
-      </option>
-    </select>
+    <span ng-repeat="item in categoryList | filter: filterByApplyTo">
+      <button class="btn btn-default btn-lg"
+              ng-click="currentTx.category.publicId = item.publicId"
+              ng-class="{'btn-success': currentTx.category.publicId === item.publicId}">
+        {{item.name}}
+      </button>
+    </span>
   </div>
 
   <div class="form-group">
     <label>Description</label>
-    <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
+    <textarea class="form-control" rows="2" ng-model="currentTx.description"></textarea>
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="place">Place</label>
-    <select class="form-control" name="place" id="place" ng-model="currentTx.place.publicId">
-      <option value="">--</option>
-      <option ng-repeat="item in placeList" ng-value="item.publicId">
-        {{$index}} - {{item.name}}
-      </option>
-    </select>
+    <span ng-repeat="item in placeList">
+      <button class="btn btn-default btn-lg"
+              ng-click="currentTx.place.publicId = item.publicId"
+              ng-class="{'btn-info': currentTx.place.publicId === item.publicId}">
+        {{item.name}}
+      </button>
+    </span>
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="event">Event</label>
-    <select class="form-control" name="event" id="event" ng-model="currentTx.event.publicId">
-      <option value="">--</option>
-      <option ng-repeat="item in eventList" ng-value="item.publicId">
-        {{$index}} - {{item.name}}
-      </option>
-    </select>
+    <span ng-repeat="item in eventList">
+      <button class="btn btn-default btn-lg"
+              ng-click="currentTx.event.publicId = item.publicId"
+              ng-class="{'btn-info': currentTx.event.publicId === item.publicId}">
+        {{item.name}}
+      </button>
+    </span>
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="currency">Currency</label>
-    <select class="form-control" name="currency" id="currency" ng-model="currentTx.currency">
-      <option ng-repeat="item in currencyList" ng-value="item">
-        {{$index}} - {{item}}
-      </option>
-    </select>
+    <span ng-repeat="item in currencyList">
+      <button class="btn btn-default btn-lg"
+              ng-click="currentTx.currency = item"
+              ng-class="{'btn-primary': currentTx.currency === item}">
+        {{item}}
+      </button>
+    </span>
   </div>
 
   <button ng-show="!isEditMode" class="btn btn-primary btn-block btn-lg" ng-click="submit(currentTx)">Add</button>
