@@ -56,17 +56,20 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
   };
 
   $scope.submit = function (data) {
+    $scope.submitted = true;
     transactionService.create(data).then(
       function() {
         if ($scope.isEditMode) {
           $scope.cancel();
         } else {
-          $scope.currentTx = {
-            calendar: new Date()
-          };
+          $scope.submitted = false;
           $scope.toExpense = undefined;
+          $scope.currentTx.amount = null;
+          $scope.currentTx.category = null;
+          $scope.currentTx.description = null;
         }
       }, function(error) {
+        $scope.submitted = false;
         console.error(error);
       });
   };

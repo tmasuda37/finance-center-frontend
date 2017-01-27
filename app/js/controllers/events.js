@@ -1,15 +1,23 @@
 var ctrl = function ($scope, eventService) {
 
+  $scope.currentEvent = {
+    name: ''
+  };
+
   $scope.fetch = function () {
     eventService.defaultList().then(function(data) {
       $scope.rowCollection = data;
     });
   };
 
+  $scope.enableEdit = function (row) {
+      $scope.currentEvent = row;
+  };
+
   $scope.submit = function (data) {
     eventService.create(data).then(
       function() {
-        $scope.newEvent = {
+        $scope.currentEvent = {
           name: ''
         };
 
@@ -24,10 +32,6 @@ var ctrl = function ($scope, eventService) {
   };
 
   $scope.fetch();
-
-  $scope.newEvent = {
-    name: ''
-  };
 
   $scope.status = 'init';
 

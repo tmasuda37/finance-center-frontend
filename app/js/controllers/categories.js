@@ -1,6 +1,6 @@
 var ctrl = function ($scope, categoryService) {
 
-  $scope.newCategory = {
+  $scope.currentCategory = {
     name: '',
     toExpense: true
   };
@@ -11,12 +11,16 @@ var ctrl = function ($scope, categoryService) {
     });
   };
 
+  $scope.enableEdit = function (row) {
+      $scope.currentCategory = row;
+  };
+
   $scope.submit = function (data) {
     categoryService.create(data).then(
       function() {
         $scope.fetch();
 
-        $scope.newCategory = {
+        $scope.currentCategory = {
           name: '',
           toExpense: true
         };

@@ -29,6 +29,11 @@
         <th st-sort="amount">Amount</th>
         <th st-sort="description" class="hide-for-small">Description</th>
       </tr>
+      <tr>
+        <th colspan="10">
+          <input st-search placeholder="Free text search" class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
     </thead>
     <tbody>
       <tr ng-repeat="row in displayedCollection track by $index" ng-class="{income: !row.toExpense}">

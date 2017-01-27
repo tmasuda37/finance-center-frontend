@@ -26,6 +26,11 @@
         <th ng-show="!isEditMode()" class="hide-for-large">Info</th>
         <th ng-show="isEditMode()">Edit/Delete</th>
       </tr>
+      <tr>
+        <th colspan="10">
+          <input st-search placeholder="Free text search" class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
     </thead>
     <tbody>
       <tr ng-repeat="row in displayedCollection" ng-class="{income: !row.category.toExpense, isMine: !row.isMine}">
