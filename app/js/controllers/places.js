@@ -1,15 +1,23 @@
 var ctrl = function ($scope, placeService) {
 
+  $scope.currentPlace = {
+    name: ''
+  };
+
   $scope.fetch = function () {
     placeService.defaultList().then(function(data) {
       $scope.rowCollection = data;
     });
   };
 
+  $scope.enableEdit = function (row) {
+      $scope.currentPlace = row;
+  };
+
   $scope.submit = function (data) {
     placeService.create(data).then(
       function() {
-        $scope.newPlace = {
+        $scope.currentPlace = {
           name: ''
         };
 
@@ -24,10 +32,6 @@ var ctrl = function ($scope, placeService) {
   };
 
   $scope.fetch();
-
-  $scope.newPlace = {
-    name: ''
-  };
 
   $scope.status = 'init';
 

@@ -42,17 +42,21 @@
   </div>
 
   <div class="form-group">
-    <button ng-show="!isEditMode" class="btn btn-primary btn-block btn-lg" ng-click="submit(currentTx)">Add</button>
-    <button ng-show="isEditMode" class="btn btn-info btn-block btn-lg" ng-click="submit(currentTx)">Update</button>
-    <button ng-show="isEditMode" class="btn btn-basic btn-block btn-lg" ng-click="cancel()">Cancel</button>
+    <button type="button"
+            class="btn btn-info btn-block btn-lg"
+            data-toggle="collapse"
+            data-target="#details">
+      Details
+    </button>
   </div>
 
-  <div class="form-group">
-    <label>Description</label>
-    <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
-  </div>
+  <div id="details" class="collapse">
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
     <span ng-repeat="item in placeList">
       <button class="btn btn-default btn-lg"
               ng-click="currentTx.place.publicId = item.publicId"
@@ -60,9 +64,9 @@
         {{item.name}}
       </button>
     </span>
-  </div>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
     <span ng-repeat="item in eventList">
       <button class="btn btn-default btn-lg"
               ng-click="currentTx.event.publicId = item.publicId"
@@ -70,14 +74,14 @@
         {{item.name}}
       </button>
     </span>
-  </div>
+    </div>
 
-  <div class="form-group form-group-lg">
-    <label class="control-label" for="calendar">Date</label>
-    <input type="date" class="form-control" id="calendar" ng-model="currentTx.calendar">
-  </div>
+    <div class="form-group form-group-lg">
+      <label class="control-label" for="calendar">Date</label>
+      <input type="date" class="form-control" id="calendar" ng-model="currentTx.calendar">
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
     <span ng-repeat="item in currencyList">
       <button class="btn btn-default btn-lg"
               ng-click="currentTx.currency = item"
@@ -85,12 +89,19 @@
         {{item}}
       </button>
     </span>
+    </div>
   </div>
 
   <div class="form-group">
-    <button ng-show="!isEditMode" class="btn btn-primary btn-block btn-lg" ng-click="submit(currentTx)">Add</button>
-    <button ng-show="isEditMode" class="btn btn-info btn-block btn-lg" ng-click="submit(currentTx)">Update</button>
-    <button ng-show="isEditMode" class="btn btn-basic btn-block btn-lg" ng-click="cancel()">Cancel</button>
+    <button ng-show="!isEditMode" class="btn btn-primary btn-block btn-lg" ng-click="submit(currentTx)"
+            ng-disabled="submitted">Add
+    </button>
+    <button ng-show="isEditMode" class="btn btn-info btn-block btn-lg" ng-click="submit(currentTx)"
+            ng-disabled="submitted">Update
+    </button>
+    <button ng-show="isEditMode" class="btn btn-basic btn-block btn-lg" ng-click="cancel()" ng-disabled="submitted">
+      Cancel
+    </button>
   </div>
 
 </form>

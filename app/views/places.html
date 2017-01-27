@@ -6,10 +6,10 @@
 
   <div class="form-group">
     <label class="control-label" for="name">Name</label>
-    <input type="text" class="form-control" id="name" ng-model="newPlace.name">
+    <input type="text" class="form-control" id="name" ng-model="currentPlace.name">
   </div>
 
-  <button class="btn btn-primary" ng-click="submit(newPlace)">Add</button>
+  <button class="btn btn-primary" ng-click="submit(currentPlace)">Add</button>
 </form>
 
 <table st-table="rowCollection" class="table table-striped">
@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="row in rowCollection">
-      <td>{{row.name}}</td>
+      <td ng-click="enableEdit(row)">{{row.name}}</td>
     </tr>
   </tbody>
 </table>
