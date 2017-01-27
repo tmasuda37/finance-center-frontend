@@ -57,6 +57,7 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
 
   $scope.submit = function (data) {
     $scope.submitted = true;
+    $scope.hasError = false;
     transactionService.create(data).then(
       function() {
         if ($scope.isEditMode) {
@@ -70,6 +71,7 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
         }
       }, function(error) {
         $scope.submitted = false;
+        $scope.hasError = true;
         console.error(error);
       });
   };
