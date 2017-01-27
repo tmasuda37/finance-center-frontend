@@ -9,10 +9,10 @@ function service($http, $q) {
     var backendUrl = '';
     if (window.location.host === 'localhost:3000') {
       backendUrl = 'localhost:8080';
-    } else if (window.location.host === 'finance-center-frontend-dev.herokuapp.com') {
-      backendUrl = 'finance-center-backend-dev.herokuapp.com';
-    } else if (window.location.host === 'finance-center-frontend-prod.herokuapp.com') {
-      backendUrl = 'finance-center-backend-prod.herokuapp.com';
+    } else if (window.location.host === 'finanzieren-dev.herokuapp.com') {
+      backendUrl = 'finanzieren-gateway-dev.herokuapp.com';
+    } else if (window.location.host === 'finanzieren.herokuapp.com') {
+      backendUrl = 'finanzieren-gateway.herokuapp.com';
     }
 
     $http({
