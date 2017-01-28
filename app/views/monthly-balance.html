@@ -15,12 +15,39 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in item.monthlyBalance">
+        <tr ng-repeat="row in item.monthlyBalance | filter:toExpenseFilter(true)">
           <td>{{row.category.name}}</td>
           <td>{{row.amount | isoCurrency:row.currency}}</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td>Total:</td>
+          <td>{{getTotal(item.monthlyBalance, true) | isoCurrency:item.currency}}</td>
+        </tr>
+      </tfoot>
     </table>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in item.monthlyBalance | filter:toExpenseFilter(false)">
+          <td>{{row.category.name}}</td>
+          <td>{{row.amount | isoCurrency:row.currency}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total:</td>
+          <td>{{getTotal(item.monthlyBalance, false) | isoCurrency:item.currency}}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <hr/>
   </div>
 
 </form>

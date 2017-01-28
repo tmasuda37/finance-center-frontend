@@ -2,6 +2,21 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
 
   $scope.targetMonth = new Date();
 
+  $scope.toExpenseFilter = function (prev) {
+    return function (item) {
+      return item.category.toExpense === prev;
+    }
+  };
+
+  $scope.getTotal = function (list, toExpense) {
+    return list.reduce(function (prev, item) {
+      if (item.category.toExpense === toExpense) {
+        return prev + item.amount;
+      }
+      return prev;
+    }, 0)
+  };
+
   $scope.retrieve = function (calendar) {
     currencyService.defaultList().then(function(currencyList) {
       $scope.wrappedList = [];
