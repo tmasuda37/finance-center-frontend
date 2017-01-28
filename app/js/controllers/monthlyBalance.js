@@ -2,10 +2,12 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
 
   $scope.targetMonth = new Date();
 
-  $scope.toExpenseFilter = function (prev) {
-    return function (item) {
-      return item.category.toExpense === prev;
-    }
+  $scope.getExpenses = function (list) {
+    return list.filter((item) => item.category.toExpense === true);
+  };
+
+  $scope.getNonExpenses = function (list) {
+    return list.filter((item) => item.category.toExpense === false);
   };
 
   $scope.getTotal = function (list, toExpense) {

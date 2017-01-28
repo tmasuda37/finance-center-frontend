@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in item.monthlyBalance | filter:toExpenseFilter(true)">
+        <tr ng-repeat="row in getExpenses(item.monthlyBalance)">
           <td>{{row.category.name}}</td>
           <td>{{row.amount | isoCurrency:row.currency}}</td>
         </tr>
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in item.monthlyBalance | filter:toExpenseFilter(false)">
+        <tr ng-repeat="row in getNonExpenses(item.monthlyBalance)">
           <td>{{row.category.name}}</td>
           <td>{{row.amount | isoCurrency:row.currency}}</td>
         </tr>
