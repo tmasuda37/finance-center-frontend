@@ -4,15 +4,13 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
 
   $scope.getExpenses = function (list) {
     return list.filter((item) => {
-      item.category.toExpense === true &&
-      item.category.toIgnoreCategoryBalance === false
+      return item.category.toExpense === true && item.category.toIgnoreCategoryBalance === false;
     });
   };
 
   $scope.getNonExpenses = function (list) {
     return list.filter((item) => {
-      item.category.toExpense === false &&
-      item.category.toIgnoreCategoryBalance === false
+      return item.category.toExpense === false && item.category.toIgnoreCategoryBalance === false;
     });
   };
 

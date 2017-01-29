@@ -1,5 +1,7 @@
 var ctrl = function ($scope, categoryService) {
 
+  $scope.itemPerPage = '5';
+
   $scope.currentCategory = {
     name: '',
     toExpense: true
