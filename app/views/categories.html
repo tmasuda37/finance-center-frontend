@@ -23,6 +23,22 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label>To Ignore in Category Balance?</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="toIgnoreCategoryBalance1" id="toIgnoreCategoryBalance1"
+               ng-model="currentCategory.toIgnoreCategoryBalance" ng-value="true">True
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="toIgnoreCategoryBalance2" id="toIgnoreCategoryBalance2"
+               ng-model="currentCategory.toIgnoreCategoryBalance" ng-value="false">False
+      </label>
+    </div>
+  </div>
+
   <button class="btn btn-primary" ng-click="submit(currentCategory)">Add</button>
 </form>
 
