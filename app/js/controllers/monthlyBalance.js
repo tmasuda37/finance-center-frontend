@@ -3,16 +3,22 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
   $scope.targetMonth = new Date();
 
   $scope.getExpenses = function (list) {
-    return list.filter((item) => item.category.toExpense === true);
+    return list.filter((item) => {
+      item.category.toExpense === true &&
+      item.category.toIgnoreCategoryBalance === false
+    });
   };
 
   $scope.getNonExpenses = function (list) {
-    return list.filter((item) => item.category.toExpense === false);
+    return list.filter((item) => {
+      item.category.toExpense === false &&
+      item.category.toIgnoreCategoryBalance === false
+    });
   };
 
   $scope.getTotal = function (list, toExpense) {
     return list.reduce(function (prev, item) {
-      if (item.category.toExpense === toExpense) {
+      if (item.category.toExpense === toExpense && item.category.toIgnoreCategoryBalance === false) {
         return prev + item.amount;
       }
       return prev;
