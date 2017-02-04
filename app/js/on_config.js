@@ -17,6 +17,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       templateUrl: 'home.html',
       title: 'Home'
     })
+    .state('dashboard', {
+      url: '/dashboard',
+      controller: 'DashboardCtrl',
+      templateUrl: 'dashboard.html',
+      title: 'Dashboard'
+    })
     .state('createAccount', {
       url: '/add-account',
       controller: 'AddAccountCtrl'
