@@ -2,15 +2,27 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
 
   $scope.targetMonth = new Date();
 
-  $scope.getExpenses = function (list) {
+  const getExpenses = function (list) {
     return list.filter((item) => {
       return item.category.toExpense === true && item.category.toIgnoreCategoryBalance === false;
     });
   };
 
-  $scope.getNonExpenses = function (list) {
+  const getNonExpenses = function (list) {
     return list.filter((item) => {
       return item.category.toExpense === false && item.category.toIgnoreCategoryBalance === false;
+    });
+  };
+
+  const getLabels = (monthlyBalance) => {
+    return monthlyBalance.map((item) => {
+      return item.category.name;
+    });
+  };
+
+  const getAmounts = (monthlyBalance) => {
+    return monthlyBalance.map((item) => {
+      return item.amount;
     });
   };
 
@@ -38,9 +50,17 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
         }
 
         promise.then(function(monthlyBalance) {
+          const expenses = getExpenses(monthlyBalance);
+          const nonExpenses = getNonExpenses(monthlyBalance);
           const item = {
             currency,
-            monthlyBalance
+            monthlyBalance,
+            expenses,
+            nonExpenses,
+            expenseLabels: getLabels(expenses),
+            expenseAmounts: getAmounts(expenses),
+            nonExpenseLabels: getLabels(nonExpenses),
+            nonExpenseAmounts: getAmounts(nonExpenses)
           };
           $scope.wrappedList.push(item);
         });

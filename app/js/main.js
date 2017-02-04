@@ -10,6 +10,7 @@ import 'angular-lock';
 import 'iso-currency';
 import 'angular-smart-table';
 import 'angular-ui-bootstrap';
+import 'angular-chart.js';
 import './templates';
 import './filters';
 import './controllers';
@@ -28,7 +29,8 @@ const requires = [
   'angular-jwt',
   'isoCurrency',
   'ui.bootstrap',
-  'smart-table'
+  'smart-table',
+  'chart.js'
 ];
 
 // mount on window for testing

@@ -1,0 +1,28 @@
+<form role="form">
+
+  <div class="form-group">
+    <label class="control-label" for="targetMonth">Target Month</label>
+    <input type="month" class="form-control" id="targetMonth" ng-model="targetMonth" ng-change="retrieve(targetMonth)">
+  </div>
+
+  <div ng-repeat="item in wrappedList">
+    <h2>Expenses&nbsp;({{item.currency}})</h2>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+        <canvas id="base" class="chart-bar"
+                chart-data="[item.amounts, item.subTotals]"
+                chart-labels="item.labels"
+                chart-colors="colors"
+                chart-dataset-override="dataSetOverride">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="wrappedList.length === 0">
+    <div class="alert alert-warning">
+      <strong>Warning!</strong> No data.
+    </div>
+  </div>
+
+</form>
