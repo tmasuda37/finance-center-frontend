@@ -5,28 +5,61 @@
     <input type="month" class="form-control" id="targetMonth" ng-model="targetMonth" ng-change="retrieve(targetMonth)">
   </div>
 
+  <button class="btn btn-info btn-md" ng-click="setBudget()">Create Budget</button>
+
   <div ng-show="item.monthlyBalance.length > 0" ng-repeat="item in wrappedList">
-    <h3>{{item.currency}}</h3>
+    <h3>
+      {{item.currency}}&nbsp;
+      <button class="btn btn-danger btn-md" ng-click="toggleEdit(item)" ng-show="!item.isEdit">Edit Budget</button>
+      <button class="btn btn-primary btn-md" ng-click="saveBudget(item.monthlyBalance)" ng-show="item.isEdit">Save
+      </button>
+      <button class="btn btn-warning btn-md" ng-click="toggleEdit(item)" ng-show="item.isEdit">Cancel</button>
+    </h3>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Category</th>
           <th>Amount</th>
+          <th ng-class="{'hide-for-small': !item.isEdit}">Budget</th>
+          <th ng-class="{'hide-for-small': item.isEdit}">Diff</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="row in item.expenses">
           <td>{{row.category.name}}</td>
           <td>{{row.amount | isoCurrency:row.currency}}</td>
+          <td ng-class="{'hide-for-small': !item.isEdit}" ng-show="item.isEdit">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+              <input type="number" class="form-control" id="budget" pattern="\d+(.\d{1,2})?"
+                     ng-model="row.budget">
+            </div>
+          </td>
+          <td ng-class="{'hide-for-small': !item.isEdit}" ng-show="!item.isEdit">
+            {{row.budget | isoCurrency:row.currency}}
+          </td>
+          <td ng-class="{'hide-for-small': item.isEdit}">
+            {{getDiff(row) | isoCurrency:row.currency}}
+          </td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td>Total:</td>
-          <td>{{getTotal(item.expenses, true) | isoCurrency:item.currency}}</td>
+          <td>{{getTotalAmount(item.expenses) | isoCurrency:item.currency}}</td>
+          <td ng-class="{'hide-for-small': !item.isEdit}">
+            {{getTotalBudget(item.expenses) | isoCurrency:item.currency}}
+          </td>
+          <td ng-class="{'hide-for-small': item.isEdit}"></td>
         </tr>
       </tfoot>
     </table>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-show="getTotalAmount(item.expenses) > 0">
+        <canvas id="doughnut1" class="chart chart-doughnut"
+                chart-data="item.expenseAmounts" chart-labels="item.expenseLabels" chart-colors="colors">
+        </canvas>
+      </div>
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -43,19 +76,14 @@
       <tfoot>
         <tr>
           <td>Total:</td>
-          <td>{{getTotal(item.nonExpenses, false) | isoCurrency:item.currency}}</td>
+          <td>{{getTotalAmount(item.nonExpenses) | isoCurrency:item.currency}}</td>
         </tr>
       </tfoot>
     </table>
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-        <canvas id="doughnut1" class="chart chart-doughnut"
-                chart-data="item.expenseAmounts" chart-labels="item.expenseLabels">
-        </canvas>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-show="getTotalAmount(item.nonExpenses) > 0">
         <canvas id="doughnut2" class="chart chart-doughnut"
-                chart-data="item.nonExpenseAmounts" chart-labels="item.nonExpenseLabels">
+                chart-data="item.nonExpenseAmounts" chart-labels="item.nonExpenseLabels" chart-colors="colors">
         </canvas>
       </div>
     </div>

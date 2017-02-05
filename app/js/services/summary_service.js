@@ -15,6 +15,18 @@ function service(transportService) {
     return transportService.send('POST', 'summary/monthly-house-hold-balance', data)
   };
 
+  service.setBudget = function (data) {
+    return transportService.send('POST', 'summary/set-budget', data)
+  };
+
+  service.updateBudget = function (data) {
+    return transportService.send('POST', 'summary/update-budget', data)
+  };
+
+  service.getBudgetTotal = function (data) {
+    return transportService.send('POST', 'summary/get-budget-total', data)
+  };
+
   return service;
 }
 

@@ -1,32 +1,44 @@
-<form role="form">
+<form id="top" role="form">
+
+  <div class="alert alert-success" ng-show="hasSaved">
+    <strong>Well done!</strong> Your inputs have successfully saved!
+  </div>
 
   <div class="alert alert-danger" ng-show="hasError">
-    <strong>Error has occurred. Please double check your inputs!</strong>
+    <strong>Error has occurred.</strong> Please double check your inputs!
   </div>
 
   <div class="form-group">
-    <span ng-repeat="item in applyToList">
-      <button class="btn btn-default btn-lg"
-              ng-click="currentTx.applyTo = item"
-              ng-class="{'btn-warning': currentTx.applyTo === item}">
-        {{item}}
-      </button>
-    </span>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="item in applyToList">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-click="currentTx.applyTo = item"
+                ng-class="{'btn-warning': currentTx.applyTo === item}">
+          {{item}}
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
-    <button class="btn btn-default btn-lg"
-            ng-model="toExpense"
-            ng-click="toExpense = true"
-            ng-class="{'btn-danger': toExpense === true}">
-      Expense
-    </button>
-    <button class="btn btn-default btn-lg"
-            ng-model="toExpense"
-            ng-click="toExpense = false"
-            ng-class="{'btn-danger': toExpense === false}">
-      Income
-    </button>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="toExpense"
+                ng-click="toExpense = true; currentTx.category = null;"
+                ng-class="{'btn-danger': toExpense === true}">
+          Expense
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="toExpense"
+                ng-click="toExpense = false; currentTx.category = null;"
+                ng-class="{'btn-danger': toExpense === false}">
+          Income
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
@@ -46,6 +58,11 @@
   </div>
 
   <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
+  </div>
+
+  <div class="form-group">
     <button type="button"
             class="btn btn-info btn-block btn-lg"
             data-toggle="collapse"
@@ -55,11 +72,6 @@
   </div>
 
   <div id="details" class="collapse">
-    <div class="form-group">
-      <label>Description</label>
-      <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
-    </div>
-
     <div class="form-group">
     <span ng-repeat="item in placeList">
       <button class="btn btn-default btn-lg"

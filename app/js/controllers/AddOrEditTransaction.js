@@ -1,4 +1,5 @@
-var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyService, eventService, placeService, transactionService) {
+var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categoryService,
+                     currencyService, eventService, placeService, transactionService) {
 
   $scope.isEditMode = $stateParam.publicId;
 
@@ -57,7 +58,7 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
 
   $scope.submit = function (data) {
     $scope.submitted = true;
-    $scope.hasError = false;
+    $anchorScroll();
     transactionService.create(data).then(
       function() {
         if ($scope.isEditMode) {
@@ -68,9 +69,12 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
           $scope.currentTx.amount = null;
           $scope.currentTx.category = null;
           $scope.currentTx.description = null;
+          $scope.hasSaved = true;
+          $scope.hasError = false;
         }
       }, function(error) {
         $scope.submitted = false;
+        $scope.hasSaved = false;
         $scope.hasError = true;
         console.error(error);
       });
@@ -82,7 +86,8 @@ var ctrl = function ($scope, $q, $state, $stateParam, categoryService, currencyS
 
 };
 
-ctrl.$inject = ['$scope', '$q', '$state', '$stateParams', 'categoryService', 'currencyService', 'eventService', 'placeService', 'transactionService'];
+ctrl.$inject = ['$scope', '$q', '$state', '$stateParams', '$anchorScroll', 'categoryService',
+                'currencyService', 'eventService', 'placeService', 'transactionService'];
 
 export default {
   name: 'AddOrEditTransactionCtrl',

@@ -11,31 +11,67 @@
 
   <div class="form-group">
     <label>To Expense?</label>
-    <div class="radio">
-      <label>
-        <input type="radio" name="toExpense1" id="toExpense1" ng-model="currentCategory.toExpense" ng-value="true">True
-      </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="toExpense2" id="toExpense2" ng-model="currentCategory.toExpense" ng-value="false">False
-      </label>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="currentCategory.toExpense"
+                ng-click="currentCategory.toExpense = true"
+                ng-class="{'btn-danger': currentCategory.toExpense === true}">
+          Expense
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="currentCategory.toExpense"
+                ng-click="currentCategory.toExpense = false"
+                ng-class="{'btn-danger': currentCategory.toExpense === false}">
+          Income
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="form-group">
     <label>To Ignore in Category Balance?</label>
-    <div class="radio">
-      <label>
-        <input type="radio" name="toIgnoreCategoryBalance1" id="toIgnoreCategoryBalance1"
-               ng-model="currentCategory.toIgnoreCategoryBalance" ng-value="true">True
-      </label>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="currentCategory.toIgnoreCategoryBalance"
+                ng-click="currentCategory.toIgnoreCategoryBalance = true"
+                ng-class="{'btn-danger': currentCategory.toIgnoreCategoryBalance === true}">
+          Ignore
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="currentCategory.toIgnoreCategoryBalance"
+                ng-click="currentCategory.toIgnoreCategoryBalance = false"
+                ng-class="{'btn-danger': currentCategory.toIgnoreCategoryBalance === false}">
+          Track
+        </button>
+      </div>
     </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="toIgnoreCategoryBalance2" id="toIgnoreCategoryBalance2"
-               ng-model="currentCategory.toIgnoreCategoryBalance" ng-value="false">False
-      </label>
+  </div>
+
+  <div class="form-group" ng-show="currentCategory.toExpense">
+    <label>Is Budget Tracking?</label>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="currentCategory.isBudgetTracking"
+                ng-click="currentCategory.isBudgetTracking = true"
+                ng-class="{'btn-danger': currentCategory.isBudgetTracking === true}">
+          Track
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <button class="btn btn-default btn-lg btn-block"
+                ng-model="currentCategory.isBudgetTracking"
+                ng-click="currentCategory.isBudgetTracking = false"
+                ng-class="{'btn-danger': currentCategory.isBudgetTracking === false}">
+          Ignore
+        </button>
+      </div>
     </div>
   </div>
 
@@ -46,8 +82,9 @@
   <thead>
     <tr>
       <th st-sort="name">Name</th>
-      <th st-sort="toExpense">To Expense?</th>
-      <th st-sort="toIgnoreCategoryBalance">To Ignore?</th>
+      <th st-sort="toExpense">Expense?</th>
+      <th st-sort="toIgnoreCategoryBalance">Ignore?</th>
+      <th st-sort="isBudgetTracking">Tracking?</th>
     </tr>
   </thead>
   <tbody>
@@ -55,11 +92,12 @@
       <td ng-click="enableEdit(row)">{{row.name}}</td>
       <td>{{row.toExpense}}</td>
       <td>{{row.toIgnoreCategoryBalance}}</td>
+      <td>{{row.isBudgetTracking}}</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="3" class="text-center">
+      <td colspan="4" class="text-center">
         <div st-pagination="" st-items-by-page="itemPerPage" st-displayed-pages=""></div>
       </td>
     </tr>
