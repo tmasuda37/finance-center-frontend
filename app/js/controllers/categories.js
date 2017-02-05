@@ -1,4 +1,4 @@
-var ctrl = function ($scope, categoryService) {
+var ctrl = function ($scope, $anchorScroll, categoryService) {
 
   $scope.itemPerPage = '5';
 
@@ -13,8 +13,9 @@ var ctrl = function ($scope, categoryService) {
     });
   };
 
-  $scope.enableEdit = function (row) {
-      $scope.currentCategory = row;
+  $scope.toggleEdit = function (row) {
+    $anchorScroll();
+    $scope.currentCategory = row;
   };
 
   $scope.submit = function (data) {
@@ -42,7 +43,7 @@ var ctrl = function ($scope, categoryService) {
 
 };
 
-ctrl.$inject = ['$scope', 'categoryService'];
+ctrl.$inject = ['$scope', '$anchorScroll', 'categoryService'];
 
 export default {
   name: 'CategoriesCtrl',

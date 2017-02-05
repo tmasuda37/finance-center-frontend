@@ -45,11 +45,15 @@
       <tfoot>
         <tr>
           <td>Total:</td>
-          <td>{{getTotalAmount(item.expenses) | isoCurrency:item.currency}}</td>
+          <td>
+            {{getTotalAmount(item.expenses) | isoCurrency:item.currency}}
+          </td>
           <td ng-class="{'hide-for-small': !item.isEdit}">
             {{getTotalBudget(item.expenses) | isoCurrency:item.currency}}
           </td>
-          <td ng-class="{'hide-for-small': item.isEdit}"></td>
+          <td ng-class="{'hide-for-small': item.isEdit}">
+            {{(getTotalBudget(item.expenses) - getTotalAmount(item.expenses)) | isoCurrency:item.currency}}
+          </td>
         </tr>
       </tfoot>
     </table>

@@ -9,7 +9,8 @@
     <input type="text" class="form-control" id="name" ng-model="currentEvent.name">
   </div>
 
-  <button class="btn btn-primary" ng-click="submit(currentEvent)">Add</button>
+  <button class="btn btn-primary" ng-show="!currentEvent.publicId" ng-click="submit(currentEvent)">Add</button>
+  <button class="btn btn-info" ng-show="currentEvent.publicId" ng-click="submit(currentEvent)">Save</button>
 </form>
 
 <table st-table="rowCollection" class="table table-striped">
@@ -20,7 +21,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="row in rowCollection">
-      <td ng-click="enableEdit(row)">{{row.name}}</td>
+      <td ng-click="toggleEdit(row)">{{row.name}}</td>
     </tr>
   </tbody>
 </table>

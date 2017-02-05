@@ -30,7 +30,7 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
     $state.go('addOrEditTransaction', {publicId: tx.publicId});
   };
 
-  $scope.enableEdit = function (row) {
+  $scope.toggleEdit = function (row) {
     if ($state.current.name === 'accountTransactions') {
       row.isEdit = !row.isEdit;
     }

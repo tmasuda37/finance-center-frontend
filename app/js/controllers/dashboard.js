@@ -26,6 +26,10 @@ var ctrl = function ($scope, $q, $filter, transactionService, currencyService, s
     });
   };
 
+  const insertDecimal = (num) => {
+    return Number(num).toFixed(2);
+  };
+
   const getDistinctByDate = (data, isBudgetTrackingOnly) => {
     const list = getDateLabels();
 
@@ -70,12 +74,12 @@ var ctrl = function ($scope, $q, $filter, transactionService, currencyService, s
       const subTotal = a + b.amount;
       b.subTotal = subTotal;
       return subTotal;
-    }, 0);
+    }, 0.00);
   };
 
   const updateBudgetTotals = (summary, totalBudgetAmount) => {
     return summary.reduce((a, b) => {
-      const budgetTotal = a - b.amount;
+      const budgetTotal = insertDecimal(a) - insertDecimal(b.amount);
       b.budgetTotal = budgetTotal;
       return budgetTotal;
     }, totalBudgetAmount);
@@ -154,27 +158,28 @@ var ctrl = function ($scope, $q, $filter, transactionService, currencyService, s
     });
   };
 
-  $scope.retrieve($scope.targetMonth);
-
-  $scope.dataSetOverride = [{
+  $scope.dataSetOverrideType1 = [
+    {
       label: 'Daily Expense',
       borderWidth: 1,
       type: 'bar'
-    },
+    }
+  ];
+
+  $scope.dataSetOverrideType2 = [
     {
-      label: 'All Expenses',
+      label: 'Total Expense',
       borderWidth: 3,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
       type: 'line'
     },
     {
       label: 'Available Budget',
-      borderWidth: 5,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
+      borderWidth: 3,
       type: 'line'
-    }];
+    }
+  ];
+
+  $scope.retrieve($scope.targetMonth);
 
 };
 

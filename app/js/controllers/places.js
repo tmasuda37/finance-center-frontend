@@ -1,4 +1,4 @@
-var ctrl = function ($scope, placeService) {
+var ctrl = function ($scope, $anchorScroll, placeService) {
 
   $scope.currentPlace = {
     name: ''
@@ -10,8 +10,9 @@ var ctrl = function ($scope, placeService) {
     });
   };
 
-  $scope.enableEdit = function (row) {
-      $scope.currentPlace = row;
+  $scope.toggleEdit = function (row) {
+    $anchorScroll();
+    $scope.currentPlace = row;
   };
 
   $scope.submit = function (data) {
@@ -37,7 +38,7 @@ var ctrl = function ($scope, placeService) {
 
 };
 
-ctrl.$inject = ['$scope', 'placeService'];
+ctrl.$inject = ['$scope', '$anchorScroll', 'placeService'];
 
 export default {
   name: 'PlacesCtrl',

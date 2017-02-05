@@ -75,7 +75,8 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" ng-click="submit(currentCategory)">Add</button>
+  <button class="btn btn-primary" ng-show="!currentCategory.publicId" ng-click="submit(currentCategory)">Add</button>
+  <button class="btn btn-info" ng-show="currentCategory.publicId" ng-click="submit(currentCategory)">Save</button>
 </form>
 
 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
@@ -89,7 +90,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="row in displayedCollection">
-      <td ng-click="enableEdit(row)">{{row.name}}</td>
+      <td ng-click="toggleEdit(row)">{{row.name}}</td>
       <td>{{row.toExpense}}</td>
       <td>{{row.toIgnoreCategoryBalance}}</td>
       <td>{{row.isBudgetTracking}}</td>
