@@ -9,21 +9,37 @@
     <h2>Expenses&nbsp;({{item.currency}})</h2>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-        <canvas id="base1" class="chart-bar"
-                chart-data="[item.allAmounts, item.allSubTotals, item.allBudgetTotals]"
+        <h4>Daily Expense (Only Tracking)</h4>
+        <canvas id="base2" class="chart-bar"
+                chart-data="[item.trackingAmounts]"
                 chart-labels="item.allLabels"
-                chart-colors="colors"
-                chart-options="options"
-                chart-dataset-override="dataSetOverride">
+                chart-dataset-override="dataSetOverrideType1">
         </canvas>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-        <canvas id="base2" class="chart-bar"
-                chart-data="[item.trackingAmounts, item.trackingSubTotals, item.trackingBudgetTotals]"
+        <h4>Daily Expense (All)</h4>
+        <canvas id="base1" class="chart-bar"
+                chart-data="[item.allAmounts]"
                 chart-labels="item.allLabels"
-                chart-colors="colors"
-                chart-options="options"
-                chart-dataset-override="dataSetOverride">
+                chart-dataset-override="dataSetOverrideType1">
+        </canvas>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <h4>Total Expense / Available Budget (Only Tracking)</h4>
+        <canvas id="base4" class="chart-bar"
+                chart-data="[item.trackingSubTotals, item.trackingBudgetTotals]"
+                chart-labels="item.allLabels"
+                chart-dataset-override="dataSetOverrideType2">
+        </canvas>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <h4>Total Expense / Available Budget (All)</h4>
+        <canvas id="base3" class="chart-bar"
+                chart-data="[item.allSubTotals, item.allBudgetTotals]"
+                chart-labels="item.allLabels"
+                chart-dataset-override="dataSetOverrideType2">
         </canvas>
       </div>
     </div>
