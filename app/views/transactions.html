@@ -33,7 +33,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in displayedCollection" ng-class="{income: !row.category.toExpense, isMine: !row.isMine}">
+      <tr ng-repeat="row in displayedCollection" ng-class="{'income': !row.category.toExpense, 'isMine': !row.isMine}">
         <td>{{row.calendar | date:'MM/dd'}}</td>
         <td>{{row.category.name}}</td>
         <td class="hide-for-small">{{row.place.name}}</td>

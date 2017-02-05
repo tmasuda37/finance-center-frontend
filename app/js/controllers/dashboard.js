@@ -1,4 +1,4 @@
-var ctrl = function ($scope, $filter, transactionService, currencyService) {
+var ctrl = function ($scope, $q, $filter, transactionService, currencyService, summaryService) {
 
   $scope.targetMonth = new Date();
 
@@ -26,9 +26,17 @@ var ctrl = function ($scope, $filter, transactionService, currencyService) {
     });
   };
 
-  const getDistinctByDate = (data) => {
+  const getDistinctByDate = (data, isBudgetTrackingOnly) => {
     const list = getDateLabels();
-    data.forEach((elt) => {
+
+    data.filter((item) => {
+      if (!isBudgetTrackingOnly) {
+        return true;
+      } else {
+        return item.category.isBudgetTracking === isBudgetTrackingOnly;
+      }
+    })
+    .forEach((elt) => {
       const date = $filter('date')(elt.calendar, 'yyyy-MM-dd');
       let existingItem = list.find((elt) => elt.date === date);
 
@@ -65,9 +73,23 @@ var ctrl = function ($scope, $filter, transactionService, currencyService) {
     }, 0);
   };
 
+  const updateBudgetTotals = (summary, totalBudgetAmount) => {
+    return summary.reduce((a, b) => {
+      const budgetTotal = a - b.amount;
+      b.budgetTotal = budgetTotal;
+      return budgetTotal;
+    }, totalBudgetAmount);
+  };
+
   const getSubTotals = (summary) => {
     return summary.map((item) => {
       return item.subTotal;
+    });
+  };
+
+  const getBudgetTotals = (summary) => {
+    return summary.map((item) => {
+      return item.budgetTotal;
     });
   };
 
@@ -76,21 +98,55 @@ var ctrl = function ($scope, $filter, transactionService, currencyService) {
       $scope.wrappedList = [];
 
       currencyList.forEach(function (currency) {
-        const request = {calendar, currency};
-        transactionService.listForHouseHold(request).then((transactionData) => {
+        const transactionRequest = {calendar, currency};
+        transactionService.listForHouseHold(transactionRequest).then((transactionData) => {
           const expenses = getExpenses(transactionData);
           if (expenses.length !== 0) {
-            const summary = getDistinctByDate(expenses);
-            updateSubTotals(summary);
-
-            const item = {
+            const budget1Request = {
+              calendar: $scope.targetMonth,
               currency,
-              labels: getLabels(summary),
-              amounts: getAmounts(summary),
-              subTotals: getSubTotals(summary)
+              isBudgetTracking: false
             };
 
-            $scope.wrappedList.push(item);
+            const budget1Promise = summaryService.getBudgetTotal(budget1Request)
+            let allSummary = [];
+            $q.when(budget1Promise, (budgetTotal) => {
+              allSummary = getDistinctByDate(expenses, false);
+              updateSubTotals(allSummary);
+              updateBudgetTotals(allSummary, budgetTotal);
+            });
+
+            const budget2Request = {
+              calendar: $scope.targetMonth,
+              currency,
+              isBudgetTracking: true
+            };
+
+            const budget2Promise = summaryService.getBudgetTotal(budget2Request);
+            let nonIgnoredOnlySummary = [];
+            $q.when(budget2Promise, (budgetTotal) => {
+              nonIgnoredOnlySummary = getDistinctByDate(expenses, true);
+              updateSubTotals(nonIgnoredOnlySummary);
+              updateBudgetTotals(nonIgnoredOnlySummary, budgetTotal);
+            });
+
+            $q.all([
+              budget1Promise,
+              budget2Promise
+            ]).then(function() {
+              const item = {
+                currency,
+                allLabels: getLabels(allSummary),
+                allAmounts: getAmounts(allSummary),
+                allSubTotals: getSubTotals(allSummary),
+                allBudgetTotals: getBudgetTotals(allSummary),
+                trackingAmounts: getAmounts(nonIgnoredOnlySummary),
+                trackingSubTotals: getSubTotals(nonIgnoredOnlySummary),
+                trackingBudgetTotals: getBudgetTotals(nonIgnoredOnlySummary)
+              };
+
+              $scope.wrappedList.push(item);
+            });
           }
         });
       });
@@ -100,16 +156,21 @@ var ctrl = function ($scope, $filter, transactionService, currencyService) {
 
   $scope.retrieve($scope.targetMonth);
 
-  $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
-
   $scope.dataSetOverride = [{
-      label: 'Bar chart',
+      label: 'Daily Expense',
       borderWidth: 1,
       type: 'bar'
     },
     {
-      label: 'Line chart',
+      label: 'All Expenses',
       borderWidth: 3,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      type: 'line'
+    },
+    {
+      label: 'Available Budget',
+      borderWidth: 5,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
       type: 'line'
@@ -117,7 +178,7 @@ var ctrl = function ($scope, $filter, transactionService, currencyService) {
 
 };
 
-ctrl.$inject = ['$scope', '$filter', 'transactionService', 'currencyService'];
+ctrl.$inject = ['$scope', '$q', '$filter', 'transactionService', 'currencyService', 'summaryService'];
 
 export default {
   name: 'DashboardCtrl',

@@ -26,14 +26,47 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
     });
   };
 
-  $scope.getTotal = function (list, toExpense) {
+  $scope.getTotalAmount = function (list) {
     return list.reduce(function (prev, item) {
-      if (item.category.toExpense === toExpense && item.category.toIgnoreCategoryBalance === false) {
+      if (item.category.toIgnoreCategoryBalance === false) {
         return prev + item.amount;
       }
       return prev;
     }, 0)
   };
+
+  $scope.getTotalBudget = function (list) {
+    return list.reduce(function (prev, item) {
+      if (item.category.toIgnoreCategoryBalance === false) {
+        return prev + item.budget;
+      }
+      return prev;
+    }, 0)
+  };
+
+  $scope.getDiff = function (row) {
+    if (!row.budget) {
+      return;
+    }
+    return row.budget - row.amount;
+  };
+
+  $scope.toggleEdit = function (item) {
+    item.isEdit = !item.isEdit;
+  }
+
+  $scope.setBudget = function () {
+    const today = new Date();
+    summaryService.setBudget(today).then(function() {
+      $scope.retrieve($scope.targetMonth);
+    });
+  }
+
+  $scope.saveBudget = function (item) {
+    summaryService.updateBudget(item).then(function() {
+      $scope.retrieve($scope.targetMonth);
+    });
+  }
 
   $scope.retrieve = function (calendar) {
     currencyService.defaultList().then(function(currencyList) {

@@ -257,3 +257,9 @@ tr.income {
 tr.isMine {
   background-color: gray !important;
 }
+
+.page-header {
+  @media only screen and (max-width: 768px) {
+    font-size: 18px !important;
+  }
+}

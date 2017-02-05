@@ -2,7 +2,7 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
 
   $scope.targetMonth = new Date();
 
-  $scope.itemPerPage = '12';
+  $scope.itemPerPage = '5';
 
   currencyService.defaultList().then(function(data) {
     $scope.currencyList = data;
