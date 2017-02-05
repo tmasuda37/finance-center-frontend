@@ -1,4 +1,4 @@
-var ctrl = function ($scope, eventService) {
+var ctrl = function ($scope, $anchorScroll, eventService) {
 
   $scope.currentEvent = {
     name: ''
@@ -10,8 +10,9 @@ var ctrl = function ($scope, eventService) {
     });
   };
 
-  $scope.enableEdit = function (row) {
-      $scope.currentEvent = row;
+  $scope.toggleEdit = function (row) {
+    $anchorScroll();
+    $scope.currentEvent = row;
   };
 
   $scope.submit = function (data) {
@@ -37,7 +38,7 @@ var ctrl = function ($scope, eventService) {
 
 };
 
-ctrl.$inject = ['$scope', 'eventService'];
+ctrl.$inject = ['$scope', '$anchorScroll', 'eventService'];
 
 export default {
   name: 'EventsCtrl',

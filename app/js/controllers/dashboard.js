@@ -157,12 +157,16 @@ var ctrl = function ($scope, $q, $filter, transactionService, currencyService, s
   $scope.retrieve($scope.targetMonth);
 
   $scope.dataSetOverride = [{
+    yAxisID: 'y-axis-1'
+  }];
+
+  $scope.dataSetOverride = [{
       label: 'Daily Expense',
       borderWidth: 1,
       type: 'bar'
     },
     {
-      label: 'All Expenses',
+      label: 'Total Expense',
       borderWidth: 3,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
@@ -170,12 +174,24 @@ var ctrl = function ($scope, $q, $filter, transactionService, currencyService, s
     },
     {
       label: 'Available Budget',
-      borderWidth: 5,
+      borderWidth: 3,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
       type: 'line'
     }];
 
+    $scope.options = {
+        scales: {
+          yAxes: [
+            {
+              id: 'y-axis-1',
+              type: 'linear',
+              display: true,
+              position: 'left'
+            }
+          ]
+        }
+      };
 };
 
 ctrl.$inject = ['$scope', '$q', '$filter', 'transactionService', 'currencyService', 'summaryService'];

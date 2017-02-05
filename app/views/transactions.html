@@ -38,7 +38,7 @@
         <td>{{row.category.name}}</td>
         <td class="hide-for-small">{{row.place.name}}</td>
         <td class="hide-for-small">{{row.event.name}}</td>
-        <td ng-click="enableEdit(row)">
+        <td ng-click="toggleEdit(row)">
           {{row.amount | isoCurrency:row.currency}}
         </td>
         <td ng-show="!row.isEdit" class="hide-for-small">{{row.description}}</td>
