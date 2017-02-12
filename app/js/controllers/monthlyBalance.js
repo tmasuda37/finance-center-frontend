@@ -56,8 +56,7 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
   }
 
   $scope.setBudget = function () {
-    const today = new Date();
-    summaryService.setBudget(today).then(function() {
+    summaryService.setBudget($scope.targetMonth).then(function() {
       $scope.retrieve($scope.targetMonth);
     });
   }
