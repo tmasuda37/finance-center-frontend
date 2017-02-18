@@ -263,3 +263,30 @@ tr.isMine {
     font-size: 18px !important;
   }
 }
+
+.center-modal {
+  position: fixed;
+  top: 30%;
+  left: 18.5%;
+  z-index: 1050;
+  width: 80%;
+  height: 50%;
+  margin-left: -10%;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

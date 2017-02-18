@@ -1,7 +1,5 @@
 var ctrl = function ($scope, $anchorScroll, categoryService) {
 
-  $scope.itemPerPage = '5';
-
   $scope.currentCategory = {
     name: '',
     toExpense: true
