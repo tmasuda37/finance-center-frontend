@@ -10,7 +10,7 @@
   <div ng-show="item.monthlyBalance.length > 0" ng-repeat="item in wrappedList">
     <h3>
       {{item.currency}}&nbsp;
-      <button class="btn btn-md" data-toggle="collapse" data-target="#details{{$index}}"
+      <button class="btn btn-md btn-warning" data-toggle="collapse" data-target="#details{{$index}}"
               ng-click="item.isCollapsed = !item.isCollapsed">
         {{item.isCollapsed !== true ? "Open" : "Close"}}
       </button>
