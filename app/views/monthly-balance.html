@@ -8,8 +8,12 @@
   <button class="btn btn-info btn-md" ng-click="setBudget()">Create Budget</button>
 
   <div ng-show="item.monthlyBalance.length > 0" ng-repeat="item in wrappedList">
-    <h3 data-toggle="collapse" data-target="#details{{$index}}">
+    <h3>
       {{item.currency}}&nbsp;
+      <button class="btn btn-md" data-toggle="collapse" data-target="#details{{$index}}"
+              ng-click="item.isCollapsed = !item.isCollapsed">
+        {{item.isCollapsed !== true ? "Open" : "Close"}}
+      </button>
     </h3>
     <div id="details{{$index}}" class="collapse">
       <button class="btn btn-danger btn-md" ng-click="toggleEdit(item)" ng-show="!item.isEdit">Edit Budget</button>
