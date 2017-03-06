@@ -14,7 +14,7 @@ var ctrl = function ($scope, $q, $filter, transactionService, currencyService, s
         date,
         amount: 0
       });
-      aDayOfMonth.setDate(counter++);
+      aDayOfMonth.setDate(++counter);
     }
 
     return list;
