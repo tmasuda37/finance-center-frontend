@@ -14,6 +14,10 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
     });
   });
 
+  $scope.currencySelect = function (item) {
+    $scope.currency = item;
+  };
+
   eventService.defaultList().then(function(data) {
     $scope.eventList = data;
   });
@@ -77,7 +81,7 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
         toExpense: values[3] < 0,
         description
       });
-    })
+    });
 
     transactionService.duplicateCheck(importedItems).then(
       function(checkedData) {

@@ -18,7 +18,7 @@ function service($http, $q) {
     $http({
       method: method,
       url: window.location.protocol + '//' + backendUrl + '/' + uri,
-      data,
+      data: data
     }).then(function successCallback(response) {
       deferred.resolve(response.data);
     }, function errorCallback(response) {

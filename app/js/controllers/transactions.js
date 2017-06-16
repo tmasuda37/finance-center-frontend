@@ -13,6 +13,11 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
     $scope.retrieve($scope.targetMonth, $scope.currency);
   });
 
+  $scope.currencySelect = function (item) {
+    $scope.currency = item;
+    $scope.retrieve($scope.targetMonth, $scope.currency);
+  };
+
   $scope.retrieve = function (calendar, currency) {
     var request = {calendar, currency};
     if ($state.current.name === 'accountTransactions') {
@@ -34,7 +39,7 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
     if ($state.current.name === 'accountTransactions') {
       row.isEdit = !row.isEdit;
     }
-  }
+  };
 
   $scope.isEditMode = function () {
     let retValue = false;
