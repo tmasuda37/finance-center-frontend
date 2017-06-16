@@ -1,10 +1,14 @@
 <form role="form">
 
   <div class="form-group">
-    <label class="control-label" for="currency">Currency</label>
-    <select class="form-control" name="currency" id="currency" ng-model="currency">
-      <option ng-repeat="item in currencyList" ng-value="item">{{item}}</option>
-    </select>
+    <span ng-repeat="item in currencyList">
+      <button class="btn btn-default btn-lg"
+              ng-model="currency"
+              ng-click="currencySelect(item)"
+              ng-class="{'btn-success': currency === item}">
+        {{item}}
+      </button>
+    </span>
   </div>
 
   <div class="form-group">

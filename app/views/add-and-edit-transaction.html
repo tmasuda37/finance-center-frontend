@@ -63,32 +63,6 @@
   </div>
 
   <div class="form-group">
-    <button type="button"
-            class="btn btn-info btn-block btn-lg"
-            data-toggle="collapse"
-            data-target="#details">
-      Details
-    </button>
-  </div>
-
-  <div id="details" class="collapse">
-    <div class="form-group">
-    <span ng-repeat="item in placeList">
-      <button class="btn btn-default btn-lg"
-              ng-click="currentTx.place.publicId = item.publicId"
-              ng-class="{'btn-info': currentTx.place.publicId === item.publicId}">
-        {{item.name}}
-      </button>
-    </span>
-    <span>
-      <button class="btn btn-default btn-lg"
-              ng-click="currentTx.place = null">
-        Reset
-      </button>
-    </span>
-    </div>
-
-    <div class="form-group">
     <span ng-repeat="item in eventList">
       <button class="btn btn-default btn-lg"
               ng-click="currentTx.event.publicId = item.publicId"
@@ -117,7 +91,6 @@
         {{item}}
       </button>
     </span>
-    </div>
   </div>
 
   <div class="form-group">
