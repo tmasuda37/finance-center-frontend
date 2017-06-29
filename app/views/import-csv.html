@@ -1,15 +1,6 @@
 <form role="form">
 
-  <div class="form-group">
-    <span ng-repeat="item in currencyList">
-      <button class="btn btn-default btn-lg"
-              ng-model="currency"
-              ng-click="currencySelect(item)"
-              ng-class="{'btn-success': currency === item}">
-        {{item}}
-      </button>
-    </span>
-  </div>
+  <currency-select currency="currency"></currency-select>
 
   <div class="form-group">
     <label>File input</label>

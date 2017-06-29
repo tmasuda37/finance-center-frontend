@@ -83,15 +83,7 @@
       <input type="date" class="form-control" id="calendar" ng-model="currentTx.calendar">
     </div>
 
-    <div class="form-group">
-    <span ng-repeat="item in currencyList">
-      <button class="btn btn-default btn-lg"
-              ng-click="currentTx.currency = item"
-              ng-class="{'btn-success': currentTx.currency === item}">
-        {{item}}
-      </button>
-    </span>
-  </div>
+  <currency-select currency="currentTx.currency"></currency-select>
 
   <div class="form-group">
     <button ng-show="!isEditMode" class="btn btn-primary btn-block btn-lg" ng-click="submit(currentTx)"

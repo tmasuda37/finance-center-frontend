@@ -1,0 +1,9 @@
+<div class="form-group">
+    <span ng-repeat="item in currencyList">
+      <button class="btn btn-default btn-lg"
+              ng-click="changeCurrency(item)"
+              ng-class="{'btn-success': currency === item}">
+        {{item}}
+      </button>
+    </span>
+</div>

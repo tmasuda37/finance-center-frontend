@@ -1,5 +1,5 @@
 var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categoryService,
-                     currencyService, eventService, placeService, transactionService) {
+                     eventService, placeService, transactionService) {
 
   $scope.isEditMode = $stateParam.publicId;
 
@@ -11,11 +11,6 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
   const categoryPromise = categoryService.getList();
   $q.when(categoryPromise, function (data) {
     $scope.categoryList = data;
-  });
-
-  const currencyPromise = currencyService.defaultList();
-  $q.when(currencyPromise, function(data) {
-    $scope.currencyList = data;
   });
 
   const eventPromise = eventService.defaultList()
@@ -33,7 +28,6 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
   $q.all([
     applyToPromise,
     categoryPromise,
-    currencyPromise,
     eventPromise,
     placePromise
   ]).then(function() {
@@ -46,9 +40,6 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
       });
     } else {
       $scope.currentTx.calendar = new Date();
-      currencyService.defaultCurrency().then(function(data) {
-        $scope.currentTx.currency = data;
-      });
     }
   });
 
@@ -87,7 +78,7 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
 };
 
 ctrl.$inject = ['$scope', '$q', '$state', '$stateParams', '$anchorScroll', 'categoryService',
-                'currencyService', 'eventService', 'placeService', 'transactionService'];
+                'eventService', 'placeService', 'transactionService'];
 
 export default {
   name: 'AddOrEditTransactionCtrl',

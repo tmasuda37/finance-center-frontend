@@ -6,16 +6,7 @@
            ng-change="retrieve(targetMonth, currency)">
   </div>
 
-  <div class="form-group">
-    <span ng-repeat="item in currencyList">
-      <button class="btn btn-default btn-lg"
-              ng-model="currency"
-              ng-click="currencySelect(item)"
-              ng-class="{'btn-success': currency === item}">
-        {{item}}
-      </button>
-    </span>
-  </div>
+  <currency-select currency="currency"></currency-select>
 
   <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
     <thead>
