@@ -1,10 +1,8 @@
-var ctrl = function ($scope, $state, transactionService) {
+var ctrl = function ($scope, $state, transactionService, currencyService) {
 
   $scope.targetMonth = new Date();
 
   $scope.itemPerPage = '12';
-
-  $scope.retrieve($scope.targetMonth, $scope.currency);
 
   $scope.$on('currencyChanged', function(event, currency) {
     $scope.retrieve($scope.targetMonth, currency);
@@ -55,9 +53,16 @@ var ctrl = function ($scope, $state, transactionService) {
     }
   };
 
+  $scope.$on('$viewContentLoaded', function() {
+    currencyService.defaultCurrency().then(function(data) {
+      $scope.currency = data;
+      $scope.retrieve($scope.targetMonth, $scope.currency);
+    });
+  });
+
 };
 
-ctrl.$inject = ['$scope', '$state', 'transactionService'];
+ctrl.$inject = ['$scope', '$state', 'transactionService', 'currencyService'];
 
 export default {
   name: 'TransactionsCtrl',
