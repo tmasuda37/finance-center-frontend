@@ -4,6 +4,8 @@ var ctrl = function ($scope, $state, transactionService) {
 
   $scope.itemPerPage = '12';
 
+  $scope.retrieve($scope.targetMonth, $scope.currency);
+
   $scope.$on('currencyChanged', function(event, currency) {
     $scope.retrieve($scope.targetMonth, currency);
   });
