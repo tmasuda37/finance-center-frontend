@@ -8,15 +8,7 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
   currencyService.defaultList().then(function(data) {
     $scope.currencyList = data;
-
-    currencyService.defaultCurrency().then(function(data) {
-      $scope.currency = data;
-    });
   });
-
-  $scope.currencySelect = function (item) {
-    $scope.currency = item;
-  };
 
   eventService.defaultList().then(function(data) {
     $scope.eventList = data;
