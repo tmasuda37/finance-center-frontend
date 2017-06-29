@@ -48,6 +48,7 @@ export default {
 
   views: {
     index: 'app/index.html',
+    favicon: 'app/favicon.ico',
     src: 'app/views/**/*.html',
     server: 'index.js',
     package: 'package.json',
