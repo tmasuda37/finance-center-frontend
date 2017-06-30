@@ -8,6 +8,10 @@
 
   <currency-select currency="currency"></currency-select>
 
+  <button class="btn btn-danger btn-md" ng-click="toggleBulkEdit()" ng-show="!isBulkEdit">Edit Budget</button>
+  <button class="btn btn-primary btn-md" ng-click="saveBulkEdit()" ng-show="isBulkEdit">Save</button>
+  <button class="btn btn-warning btn-md" ng-click="toggleBulkEdit()" ng-show="isBulkEdit">Cancel</button>
+
   <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
     <thead>
       <tr>
@@ -31,7 +35,19 @@
         <td>{{row.calendar | date:'MM/dd'}}</td>
         <td>{{row.category.name}}</td>
         <td class="hide-for-small">{{row.place.name}}</td>
-        <td class="hide-for-small">{{row.event.name}}</td>
+        <td class="hide-for-small" ng-hide="isBulkEdit">{{row.event.name}}</td>
+        <td class="hide-for-small" ng-show="isBulkEdit">
+          <select class="form-control"
+                  name="event{{$index}}"
+                  id="event{{$index}}"
+                  ng-model="row.event.publicId"
+                  ng-change="row.isBulkEdit = true">
+            <option value="">--</option>
+            <option ng-repeat="item in eventList" ng-value="item.publicId">
+              {{$index}} - {{item.name}}
+            </option>
+          </select>
+        </td>
         <td ng-click="toggleEdit(row)">
           {{row.amount | isoCurrency:row.currency}}
         </td>
