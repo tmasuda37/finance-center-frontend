@@ -69,6 +69,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       controller: 'MonthlyBalanceCtrl',
       title: 'House Hold Monthly Balance'
     })
+    .state('houseHoldEventBalance', {
+      url: '/house-hold-event-balance',
+      templateUrl: 'event-balance.html',
+      controller: 'EventBalanceCtrl',
+      title: 'House Hold Event Balance'
+    })
     .state('houseHold', {
       url: '/house-hold',
       templateUrl: 'house-hold.html',

@@ -1,8 +1,14 @@
-var ctrl = function ($scope, $state, transactionService, currencyService) {
+var ctrl = function ($scope, $state, transactionService, currencyService, eventService) {
 
   $scope.targetMonth = new Date();
 
   $scope.itemPerPage = '12';
+
+  $scope.isBulkEdit = false;
+
+  eventService.defaultList().then(function(data) {
+    $scope.eventList = data;
+  });
 
   $scope.$on('currencyChanged', function(event, currency) {
     $scope.retrieve($scope.targetMonth, currency);
@@ -53,6 +59,21 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
     }
   };
 
+  $scope.toggleBulkEdit = function () {
+    $scope.isBulkEdit = !$scope.isBulkEdit;
+
+    if ($scope.isBulkEdit === false) {
+      $scope.retrieve($scope.targetMonth, $scope.currency);
+    }
+  };
+
+  $scope.saveBulkEdit = function () {
+    const editingData = $scope.rowCollection.filter(tx => tx.isBulkEdit === true);
+    transactionService.saveAll(editingData).then(function() {
+      $scope.toggleBulkEdit();
+    });
+  };
+
   $scope.$on('$viewContentLoaded', function() {
     currencyService.defaultCurrency().then(function(data) {
       $scope.currency = data;
@@ -62,7 +83,7 @@ var ctrl = function ($scope, $state, transactionService, currencyService) {
 
 };
 
-ctrl.$inject = ['$scope', '$state', 'transactionService', 'currencyService'];
+ctrl.$inject = ['$scope', '$state', 'transactionService', 'currencyService', 'eventService'];
 
 export default {
   name: 'TransactionsCtrl',
