@@ -1,0 +1,15 @@
+<div ng-repeat="event in eventList">
+  <h3>{{event.name}}</h3>
+  <table st-table="event.balanceList" class="table table-striped">
+    <thead>
+      <tr>
+        <th ng-repeat="row in event.balanceList">{{row.currency}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="monetary" ng-repeat="row in event.balanceList">{{row.amount | isoCurrency:row.currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -28,6 +28,6 @@ gulp.task('views', function() {
   const packageFile = gulp.src(config.views.package)
     .pipe(gulp.dest(config.buildDir));
 
-  return merge(indexFile, views, serverFile, packageFile);
+  return merge(indexFile, faviconFile, views, serverFile, packageFile);
 
 });
