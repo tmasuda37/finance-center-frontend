@@ -1,10 +1,14 @@
-var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categoryService,
-                     eventService, placeService, transactionService) {
+var ctrl = function ($scope, $q, $state, $stateParam, $anchorScroll, categoryService,
+  eventService, placeService, transactionService) {
 
   $scope.isEditMode = $stateParam.publicId;
 
+  $scope.options = {
+    showWeeks: false
+  };
+
   const applyToPromise = transactionService.getApplyToList();
-  $q.when(applyToPromise, function(data) {
+  $q.when(applyToPromise, function (data) {
     $scope.applyToList = data;
   });
 
@@ -14,12 +18,12 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
   });
 
   const eventPromise = eventService.defaultList()
-  $q.when(eventPromise, function(data) {
+  $q.when(eventPromise, function (data) {
     $scope.eventList = data;
   });
 
   const placePromise = placeService.defaultList()
-  $q.when(placePromise, function(data) {
+  $q.when(placePromise, function (data) {
     $scope.placeList = data;
   });
 
@@ -30,10 +34,10 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
     categoryPromise,
     eventPromise,
     placePromise
-  ]).then(function() {
+  ]).then(function () {
     if ($scope.isEditMode) {
-      var request = {publicId: $stateParam.publicId};
-      transactionService.retrieve(request).then(function(data) {
+      var request = { publicId: $stateParam.publicId };
+      transactionService.retrieve(request).then(function (data) {
         data.calendar = new Date(data.calendar);
         $scope.currentTx = data;
         $scope.toExpense = data.category.toExpense;
@@ -51,7 +55,7 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
     $scope.submitted = true;
     $anchorScroll();
     transactionService.create(data).then(
-      function() {
+      function () {
         if ($scope.isEditMode) {
           $scope.cancel();
         } else {
@@ -63,7 +67,7 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
           $scope.hasSaved = true;
           $scope.hasError = false;
         }
-      }, function(error) {
+      }, function (error) {
         $scope.submitted = false;
         $scope.hasSaved = false;
         $scope.hasError = true;
@@ -78,7 +82,7 @@ var ctrl = function ($scope, $q, $state, $stateParam,  $anchorScroll, categorySe
 };
 
 ctrl.$inject = ['$scope', '$q', '$state', '$stateParams', '$anchorScroll', 'categoryService',
-                'eventService', 'placeService', 'transactionService'];
+  'eventService', 'placeService', 'transactionService'];
 
 export default {
   name: 'AddOrEditTransactionCtrl',

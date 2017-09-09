@@ -21,7 +21,7 @@
   ],
   "private": false,
   "engines": {
-    "node": "~4.2.x"
+    "node": "4.8.4"
   },
   "scripts": {
     "start": "node index.js",
