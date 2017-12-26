@@ -90,10 +90,10 @@
 
   <div class="form-group">
     <select class="form-control"
-            ng-model="currentTx.event">
+            ng-model="currentTx.event.publicId">
       <option value="">--</option>
       <option ng-repeat="item in eventList"
-              ng-value="item">
+              ng-value="item.publicId">
         {{$index}} - {{item.name}}
       </option>
     </select>
