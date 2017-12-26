@@ -111,17 +111,18 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     domain: 'tmasuda.auth0.com'
   });
 
-  $httpProvider.interceptors.push(function($q) {
+  $httpProvider.defaults.cache = true;
+  $httpProvider.interceptors.push(function ($q) {
     return {
-      'request': function(config) {
-         config.headers = config.headers || {};
-         if (localStorage.id_token) {
-             config.headers.Authorization = 'Bearer ' + localStorage.id_token;
-         }
-         return config;
+      'request': function (config) {
+        config.headers = config.headers || {};
+        if (localStorage.id_token) {
+          config.headers.Authorization = 'Bearer ' + localStorage.id_token;
+        }
+        return config;
       },
 
-      'responseError': function(response) {
+      'responseError': function (response) {
         if (response.status === 401) {
           window.location.href = '/';
         }
