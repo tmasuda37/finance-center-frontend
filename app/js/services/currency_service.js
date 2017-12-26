@@ -10,15 +10,7 @@ function service(transportService, $q) {
   };
 
   service.defaultCurrency = function () {
-    if (!cachedCurrency) {
-      return transportService.send('GET', 'currency/default')
-    }
-
-    return $q.resolve(cachedCurrency);
-  };
-
-  service.cacheCurrency = function (currency) {
-    cachedCurrency = currency;
+    return transportService.send('GET', 'currency/default')
   };
 
   return service;
