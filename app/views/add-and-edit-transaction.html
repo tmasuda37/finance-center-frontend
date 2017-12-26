@@ -1,39 +1,26 @@
-<form id="top"
-      role="form">
+<form id="top" role="form">
 
-  <div class="alert alert-success"
-       ng-show="hasSaved">
+  <div class="alert alert-success" ng-show="hasSaved">
     <strong>Well done!</strong> Your inputs have successfully saved!
   </div>
 
-  <div class="alert alert-danger"
-       ng-show="hasError">
+  <div class="alert alert-danger" ng-show="hasError">
     <strong>Error has occurred.</strong> Please double check your inputs!
   </div>
 
   <p class="form-group">
     <label>Date</label>
-    <input type="text"
-           class="form-control"
-           uib-datepicker-popup="MMM-dd-yyyy"
-           ng-model="currentTx.calendar"
-           disabled/>
+    <input type="text" class="form-control" uib-datepicker-popup="MMM-dd-yyyy" ng-model="currentTx.calendar" disabled/>
   </p>
 
   <div class="form-group form-group-lg">
-    <div class="center"
-         uib-datepicker
-         ng-model="currentTx.calendar"
-         datepicker-options="options"></div>
+    <div class="center" uib-datepicker ng-model="currentTx.calendar" datepicker-options="options"></div>
   </div>
 
   <div class="form-group">
     <div class="row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"
-           ng-repeat="item in applyToList">
-        <button class="btn btn-default btn-lg btn-block"
-                ng-click="currentTx.applyTo = item"
-                ng-class="{'btn-warning': currentTx.applyTo === item}">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="item in applyToList">
+        <button class="btn btn-default btn-lg btn-block" ng-click="currentTx.applyTo = item" ng-class="{'btn-warning': currentTx.applyTo === item}">
           {{item}}
         </button>
       </div>
@@ -43,18 +30,14 @@
   <div class="form-group">
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <button class="btn btn-default btn-lg btn-block"
-                ng-model="toExpense"
-                ng-click="toExpense = true; currentTx.category = null;"
-                ng-class="{'btn-danger': toExpense === true}">
+        <button class="btn btn-default btn-lg btn-block" ng-model="toExpense" ng-click="toExpense = true; currentTx.category = null;"
+          ng-class="{'btn-danger': toExpense === true}">
           Expense
         </button>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <button class="btn btn-default btn-lg btn-block"
-                ng-model="toExpense"
-                ng-click="toExpense = false; currentTx.category = null;"
-                ng-class="{'btn-danger': toExpense === false}">
+        <button class="btn btn-default btn-lg btn-block" ng-model="toExpense" ng-click="toExpense = false; currentTx.category = null;"
+          ng-class="{'btn-danger': toExpense === false}">
           Income
         </button>
       </div>
@@ -63,37 +46,27 @@
 
   <div class="form-group">
     <span ng-repeat="item in categoryList | filter: filterByApplyTo">
-      <button class="btn btn-default btn-lg"
-              ng-click="currentTx.category.publicId = item.publicId"
-              ng-class="{'btn-success': currentTx.category.publicId === item.publicId}">
+      <button class="btn btn-default btn-lg" ng-click="currentTx.category.publicId = item.publicId" ng-class="{'btn-success': currentTx.category.publicId === item.publicId}">
         {{item.name}}
       </button>
     </span>
   </div>
 
   <div class="form-group">
-    <label class="control-label"
-           for="amount">Amount</label>
-    <input type="number"
-           class="form-control"
-           id="amount"
-           pattern="\d+(.\d{1,2})?"
-           ng-model="currentTx.amount">
+    <label class="control-label" for="amount">Amount</label>
+    <input type="number" class="form-control" id="amount" pattern="\d+(.\d{1,2})?" ng-model="currentTx.amount">
   </div>
 
   <div class="form-group">
     <label>Description</label>
-    <textarea class="form-control"
-              rows="3"
-              ng-model="currentTx.description"></textarea>
+    <textarea class="form-control" rows="3" ng-model="currentTx.description"></textarea>
   </div>
 
   <div class="form-group">
-    <select class="form-control"
-            ng-model="currentTx.event.publicId">
+    <label>Event</label>
+    <select class="form-control" ng-model="currentTx.event.publicId">
       <option value="">--</option>
-      <option ng-repeat="item in eventList"
-              ng-value="item.publicId">
+      <option ng-repeat="item in eventList" ng-value="item.publicId">
         {{$index}} - {{item.name}}
       </option>
     </select>
@@ -102,22 +75,13 @@
   <currency-select currency="currentTx.currency"></currency-select>
 
   <div class="form-group">
-    <button ng-show="!isEditMode"
-            class="btn btn-primary btn-block btn-lg"
-            ng-click="submit(currentTx)"
-            ng-disabled="submitted">
+    <button ng-show="!isEditMode" class="btn btn-primary btn-block btn-lg" ng-click="submit(currentTx)" ng-disabled="submitted">
       Add
     </button>
-    <button ng-show="isEditMode"
-            class="btn btn-info btn-block btn-lg"
-            ng-click="submit(currentTx)"
-            ng-disabled="submitted">
+    <button ng-show="isEditMode" class="btn btn-info btn-block btn-lg" ng-click="submit(currentTx)" ng-disabled="submitted">
       Update
     </button>
-    <button ng-show="isEditMode"
-            class="btn btn-basic btn-block btn-lg"
-            ng-click="cancel()"
-            ng-disabled="submitted">
+    <button ng-show="isEditMode" class="btn btn-basic btn-block btn-lg" ng-click="cancel()" ng-disabled="submitted">
       Cancel
     </button>
   </div>
