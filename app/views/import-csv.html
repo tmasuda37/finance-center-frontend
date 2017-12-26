@@ -18,7 +18,6 @@
       <tr>
         <th st-sort="calendar">Date</th>
         <th st-sort="category">Category</th>
-        <th st-sort="place" class="hide-for-small">Place</th>
         <th st-sort="event" class="hide-for-small">Event</th>
         <th st-sort="currency">Currency</th>
         <th st-sort="amount">Amount</th>
@@ -36,14 +35,6 @@
         <td>
           <select class="form-control" name="category{{$index}}" id="category{{$index}}" ng-model="row.category">
             <option ng-repeat="item in categoryList | filter: filterByApplyTo(item, row)" ng-value="item">
-              {{$index}} - {{item.name}}
-            </option>
-          </select>
-        </td>
-        <td class="hide-for-small">
-          <select class="form-control" name="place{{$index}}" id="place{{$index}}" ng-model="row.place">
-            <option value="">--</option>
-            <option ng-repeat="item in placeList" ng-value="item">
               {{$index}} - {{item.name}}
             </option>
           </select>
