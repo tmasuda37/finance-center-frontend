@@ -1,9 +1,7 @@
-function service(transportService, $q) {
+function service(transportService) {
   'ngInject';
 
   const service = {};
-
-  let cachedCurrency;
 
   service.defaultList = function () {
     return transportService.send('GET', 'currency/list')
