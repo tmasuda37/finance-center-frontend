@@ -1,6 +1,6 @@
-var ctrl = function ($scope, $state, transactionService, currencyService, eventService) {
+var ctrl = function ($scope, $state, $stateParams, transactionService, currencyService, eventService) {
 
-  $scope.targetMonth = new Date();
+  $scope.targetMonth = $stateParams.targetMonth || new Date();
 
   $scope.itemPerPage = '12';
 
@@ -14,16 +14,22 @@ var ctrl = function ($scope, $state, transactionService, currencyService, eventS
     $scope.retrieve($scope.targetMonth, currency);
   });
 
-  $scope.retrieve = function (calendar, currency) {
-    var request = {calendar, currency};
+  $scope.retrieve = function (calendar, currency, category) {
+    var request = { calendar, currency, category };
+    $scope.rowCollection = [];
+
     if ($state.current.name === 'accountTransactions') {
-      transactionService.listForAccount(request).then(function(data) {
+      transactionService.listForAccount(request).then(function (data) {
         $scope.rowCollection = data;
       });
     } else {
-      transactionService.listForHouseHold(request).then(function(data) {
+      transactionService.listForHouseHold(request).then(function (data) {
         $scope.rowCollection = data;
       });
+    }
+
+    if (category) {
+      $scope.itemPerPage = $scope.rowCollection.length;
     }
   };
 
@@ -74,16 +80,16 @@ var ctrl = function ($scope, $state, transactionService, currencyService, eventS
     });
   };
 
-  $scope.$on('$viewContentLoaded', function() {
-    currencyService.defaultCurrency().then(function(data) {
-      $scope.currency = data;
-      $scope.retrieve($scope.targetMonth, $scope.currency);
+  $scope.$on('$viewContentLoaded', function () {
+    currencyService.defaultCurrency().then(function (data) {
+      $scope.currency = $stateParams.currency || data;
+      $scope.retrieve($scope.targetMonth, $scope.currency, $stateParams.category);
     });
   });
 
 };
 
-ctrl.$inject = ['$scope', '$state', 'transactionService', 'currencyService', 'eventService'];
+ctrl.$inject = ['$scope', '$state', '$stateParams', 'transactionService', 'currencyService', 'eventService'];
 
 export default {
   name: 'TransactionsCtrl',

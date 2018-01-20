@@ -67,6 +67,10 @@ var ctrl = function ($scope, $state, summaryService, currencyService) {
     });
   }
 
+  $scope.showTransactions = (currency, category) => {
+    $state.go('houseHoldTransactions', { targetMonth: $scope.targetMonth, currency, category });
+  };
+
   $scope.retrieve = function (calendar) {
     currencyService.defaultList().then(function(currencyList) {
       $scope.wrappedList = [];

@@ -61,7 +61,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       url: '/house-hold-transactions',
       templateUrl: 'transactions.html',
       controller: 'TransactionsCtrl',
-      title: 'House Hold Transactions'
+      title: 'House Hold Transactions',
+      params: {
+        targetMonth: null,
+        currency: null,
+        category: null
+      }
     })
     .state('houseHoldMonthlyBalance', {
       url: '/house-hold-monthly-balance',
