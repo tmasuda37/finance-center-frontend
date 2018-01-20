@@ -7,15 +7,9 @@
 
   <button class="btn btn-info btn-md" ng-click="setBudget()">Create Budget</button>
 
-  <div ng-show="item.monthlyBalance.length > 0" ng-repeat="item in wrappedList">
-    <h3>
-      {{item.currency}}&nbsp;
-      <button class="btn btn-md btn-warning" data-toggle="collapse" data-target="#details{{$index}}"
-              ng-click="item.isCollapsed = !item.isCollapsed">
-        {{item.isCollapsed !== true ? "Open" : "Close"}}
-      </button>
-    </h3>
-    <div id="details{{$index}}" class="collapse">
+  <div ng-show="item.monthlyBalance.length > 0 && getTotalAmount(item.expenses) > 0" ng-repeat="item in wrappedList">
+    <h3>{{item.currency}}</h3>
+    <div id="details{{$index}}" class="">
       <button class="btn btn-danger btn-md" ng-click="toggleEdit(item)" ng-show="!item.isEdit">Edit Budget</button>
       <button class="btn btn-primary btn-md" ng-click="saveBudget(item.monthlyBalance)" ng-show="item.isEdit">Save</button>
       <button class="btn btn-warning btn-md" ng-click="toggleEdit(item)" ng-show="item.isEdit">Cancel</button>
@@ -30,12 +24,13 @@
         </thead>
         <tbody>
           <tr ng-repeat="row in item.expenses">
-            <td><a ng-click="showTransactions(item.currency, row.category)">{{row.category.name}}</a></td>
+            <td>
+              <a ng-click="showTransactions(item.currency, row.category)">{{row.category.name}}</a>
+            </td>
             <td>{{row.amount | isoCurrency:row.currency}}</td>
             <td ng-class="{'hide-for-small': !item.isEdit}" ng-show="item.isEdit">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                <input type="number" class="form-control" id="budget" pattern="\d+(.\d{1,2})?"
-                       ng-model="row.budget">
+                <input type="number" class="form-control" id="budget" pattern="\d+(.\d{1,2})?" ng-model="row.budget">
               </div>
             </td>
             <td ng-class="{'hide-for-small': !item.isEdit}" ng-show="!item.isEdit">
@@ -61,40 +56,6 @@
           </tr>
         </tfoot>
       </table>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-show="getTotalAmount(item.expenses) > 0">
-          <canvas id="doughnut1" class="chart chart-doughnut"
-                  chart-data="item.expenseAmounts" chart-labels="item.expenseLabels" chart-colors="colors">
-          </canvas>
-        </div>
-      </div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="row in item.nonExpenses">
-            <td>{{row.category.name}}</td>
-            <td>{{row.amount | isoCurrency:row.currency}}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Total:</td>
-            <td>{{getTotalAmount(item.nonExpenses) | isoCurrency:item.currency}}</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-show="getTotalAmount(item.nonExpenses) > 0">
-          <canvas id="doughnut2" class="chart chart-doughnut"
-                  chart-data="item.nonExpenseAmounts" chart-labels="item.nonExpenseLabels" chart-colors="colors">
-          </canvas>
-        </div>
-      </div>
     </div>
     <hr/>
   </div>
