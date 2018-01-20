@@ -30,7 +30,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="row in item.expenses">
-            <td>{{row.category.name}}</td>
+            <td><a ng-click="showTransactions(item.currency, row.category)">{{row.category.name}}</a></td>
             <td>{{row.amount | isoCurrency:row.currency}}</td>
             <td ng-class="{'hide-for-small': !item.isEdit}" ng-show="item.isEdit">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
