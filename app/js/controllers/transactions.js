@@ -21,15 +21,13 @@ var ctrl = function ($scope, $state, $stateParams, transactionService, currencyS
     if ($state.current.name === 'accountTransactions') {
       transactionService.listForAccount(request).then(function (data) {
         $scope.rowCollection = data;
+        $scope.itemPerPage = category ? $scope.rowCollection.length : $scope.itemPerPage;
       });
     } else {
       transactionService.listForHouseHold(request).then(function (data) {
         $scope.rowCollection = data;
+        $scope.itemPerPage = category ? $scope.rowCollection.length : $scope.itemPerPage;
       });
-    }
-
-    if (category) {
-      $scope.itemPerPage = $scope.rowCollection.length;
     }
   };
 
