@@ -2,19 +2,23 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
   var reader = new FileReader();
 
-  categoryService.getList().then(function(data) {
+  categoryService.getList().then(function (data) {
     $scope.categoryList = data;
+    const defaultExpenseCategory = data.filter(cat => cat.name === '帳尻合わせ' && cat.toExpense);
+    if (defaultExpenseCategory.length > 0) {
+      $scope.defaultExpenseCategory = defaultExpenseCategory[0];
+    }
   });
 
-  currencyService.defaultList().then(function(data) {
+  currencyService.defaultList().then(function (data) {
     $scope.currencyList = data;
   });
 
-  eventService.defaultList().then(function(data) {
+  eventService.defaultList().then(function (data) {
     $scope.eventList = data;
   });
 
-  placeService.defaultList().then(function(data) {
+  placeService.defaultList().then(function (data) {
     $scope.placeList = data;
   });
 
@@ -28,9 +32,9 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
       }
 
       if (str.charAt(i) == ',' && inQuote) {
-          copy += '|';
+        copy += '|';
       } else {
-          copy += str.charAt(i);
+        copy += str.charAt(i);
       }
     }
 
@@ -65,7 +69,7 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
       }
 
       importedItems.push({
-        calendar: new Date(dateInfo[2], dateInfo[1]-1, dateInfo[0]),
+        calendar: new Date(dateInfo[2], dateInfo[1] - 1, dateInfo[0]),
         category: null,
         applyTo: 'Bank',
         currency: $scope.currency,
@@ -76,9 +80,12 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
     });
 
     transactionService.duplicateCheck(importedItems).then(
-      function(checkedData) {
-        $scope.rowCollection = checkedData;
-      }, function(error) {
+      function (checkedData) {
+        $scope.rowCollection = checkedData.map(data => {
+          data.category = $scope.defaultExpenseCategory;
+          return data;
+        });
+      }, function (error) {
         console.error(error);
       });
 
@@ -93,9 +100,9 @@ var ctrl = function ($scope, categoryService, currencyService, eventService, pla
 
   $scope.submit = function () {
     transactionService.createAll($scope.rowCollection).then(
-      function() {
+      function () {
         $scope.rowCollection = [];
-      }, function(error) {
+      }, function (error) {
         console.error(error);
       });
   };
