@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in displayedCollection" ng-class="{'income': !row.category.toExpense, 'isMine': !row.isMine}">
+      <tr ng-repeat="row in displayedCollection track by $index" ng-class="{'income': !row.category.toExpense, 'isMine': !row.isMine}">
         <td>{{row.calendar | date:'MM/dd'}}</td>
         <td ng-hide="isBulkEdit">{{row.category.name}}</td>
         <td ng-show="isBulkEdit">
@@ -40,7 +40,7 @@
                   ng-model="row.category.publicId"
                   ng-change="row.isBulkEdit = true">
             <option value="">--</option>
-            <option ng-repeat="item in categoryList" ng-value="item.publicId">
+            <option ng-repeat="item in categoryList | filter: filterByApplyTo(item, row)" ng-value="item.publicId">
               {{$index}} - {{item.name}}
             </option>
           </select>

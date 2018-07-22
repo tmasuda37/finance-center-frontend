@@ -18,6 +18,12 @@ var ctrl = function ($scope, $state, $stateParams, transactionService, currencyS
     $scope.retrieve($scope.targetMonth, currency);
   });
 
+  $scope.filterByApplyTo = function (dummy, row) {
+    return function (item) {
+      return item.toExpense === row.category.toExpense;
+    }
+  };
+
   $scope.retrieve = function (calendar, currency, category) {
     var request = { calendar, currency, category };
     $scope.rowCollection = [];
