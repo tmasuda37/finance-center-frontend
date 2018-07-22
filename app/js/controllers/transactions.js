@@ -1,4 +1,4 @@
-var ctrl = function ($scope, $state, $stateParams, transactionService, currencyService, eventService) {
+var ctrl = function ($scope, $state, $stateParams, transactionService, currencyService, eventService, categoryService) {
 
   $scope.targetMonth = $stateParams.targetMonth || new Date();
 
@@ -9,6 +9,10 @@ var ctrl = function ($scope, $state, $stateParams, transactionService, currencyS
   eventService.defaultList().then(function(data) {
     $scope.eventList = data;
   });
+
+  categoryService.getList().then(function(data) {
+    $scope.categoryList = data;
+  })
 
   $scope.$on('currencyChanged', function(event, currency) {
     $scope.retrieve($scope.targetMonth, currency);
@@ -87,7 +91,7 @@ var ctrl = function ($scope, $state, $stateParams, transactionService, currencyS
 
 };
 
-ctrl.$inject = ['$scope', '$state', '$stateParams', 'transactionService', 'currencyService', 'eventService'];
+ctrl.$inject = ['$scope', '$state', '$stateParams', 'transactionService', 'currencyService', 'eventService', 'categoryService'];
 
 export default {
   name: 'TransactionsCtrl',

@@ -32,7 +32,19 @@
     <tbody>
       <tr ng-repeat="row in displayedCollection" ng-class="{'income': !row.category.toExpense, 'isMine': !row.isMine}">
         <td>{{row.calendar | date:'MM/dd'}}</td>
-        <td>{{row.category.name}}</td>
+        <td ng-hide="isBulkEdit">{{row.category.name}}</td>
+        <td ng-show="isBulkEdit">
+          <select class="form-control"
+                  name="category{{$index}}"
+                  id="category{{$index}}"
+                  ng-model="row.category.publicId"
+                  ng-change="row.isBulkEdit = true">
+            <option value="">--</option>
+            <option ng-repeat="item in categoryList" ng-value="item.publicId">
+              {{$index}} - {{item.name}}
+            </option>
+          </select>
+        </td>
         <td class="hide-for-small">{{row.place.name}}</td>
         <td class="hide-for-small" ng-hide="isBulkEdit">{{row.event.name}}</td>
         <td class="hide-for-small" ng-show="isBulkEdit">
